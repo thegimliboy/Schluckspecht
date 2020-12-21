@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SocketChat</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header class='headline'>
+      <h1> Schluckspecht: Der Titel </h1>
+    </header>
+
+    <section class="left">
+      <h2> Schluckspecht: Das Spiel </h2>
+    </section>
+
+    <section class="right">
+      <div class="oben">
+        <p> Chat </p>
+        <ul id="nachrichten"></ul>
+        <form action="">
+          <input id="cn" autocomplete="off" />
+          <button>Send</button>
+        </form>
+      </div>
+      <div class="unten">
+        <p id="OLcount"> Aktuell Online: </p>
+        <ul id="currOnline"></ul>
+      </div>
+    </section>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script> var socket = io(); </script>
+
+    <script>
+    var players = [];
+    $(function(){
+      username = window.prompt('What is your Name?');
+      socket.emit('username', username);
+
+
+      socket.on('currOnline', function(currOnline) {
+        players = currOnline;
+        doOnlineL();
+      });
+
+      $('form').submit(function(event){
+        event.preventDefault();
+        socket.emit('nachricht',$('#cn').val());
+        $('#cn').val('');
+        return false;
+      });
+
+      socket.on('nachricht', function(msg){
+        $('#nachrichten').append($('<li>').text(msg));
+      })
+    });
+
+    function doOnlineL () {
+        $('#currOnline').empty();
+        document.getElementById('currOnline').innerHTML =
+        '<li>' + players.join('</li><li>') + '</li>'
+    };
+    </script>
+
+  </body>
+</html>

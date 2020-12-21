@@ -1,0 +1,30 @@
+body {
+    font-family: arial;
+    display: block;
+    height: 100%;
+}
+
+.headline{
+  text-align: center;
+  background-color: #ffce80;
+}
+
+.left {
+  background-color: #ff9e2c;
+  float: left;
+  width: 80%;
+}
+
+.right {
+    background-color: #b6701e;
+    float: left;
+    width: 20%;
+}
+
+.oben {
+
+}
+
+.unten {
+
+}
