@@ -18,7 +18,7 @@ io.on('connection', (socket) => {
 var socketuser;
   socket.on('username', (name) => {
     if (name === undefined || name === null) {} else {
-      console.log(name+' connected')
+      console.log(name+' connected; ID='+socket.id)
       io.emit('nachricht', name + '  connected');
       socketuser = name;
       players.push(name);
@@ -44,6 +44,12 @@ var socketuser;
   socket.on('nachricht', (msg) => {
     io.emit('nachricht', socketuser+': '+msg);
     console.log('CHAT: ' + socketuser+': '+msg);
+  });
+
+  socket.on('gamecode', (room) => {
+    //hier muss die ganze logic für den room-existence check hin
+    console.log(io.sockets.adapter.rooms[room]);
+    io.emit('gc_isavalible', '1');
   });
 
 });

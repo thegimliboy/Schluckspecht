@@ -36,8 +36,12 @@
     <script>
     var players = [];
     $(function(){
-      username = window.prompt('What is your Name?');
+      var username = getParameterByName('username');
+      if (username.length < 2) {
+        username = window.prompt('What is your Name?');
+      }
       socket.emit('username', username);
+
 
 
       socket.on('currOnline', function(currOnline) {
@@ -62,6 +66,16 @@
         document.getElementById('currOnline').innerHTML =
         '<li>' + players.join('</li><li>') + '</li>'
     };
+
+    function getParameterByName (name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    };
+
     </script>
 
   </body>

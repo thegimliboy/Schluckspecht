@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Join Game</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <h1> Startseite: Spielbeitritt </h1>
+
+    <form action="">
+      <p> Spielcode (frei lassen wenn Host): </p>
+      <input id="gamecode" autocomplete="off" />
+      <br>
+      <p> Nickname: </p>
+      <input id="username" autocomplete="off" required="required"/>
+      <br>
+      <button>Los geht's</button>
+    </form>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script> var socket = io(); </script>
+    <script>
+    var ww;
+    var gamecode;
+      $(function(){
+        $('form').submit(function(event){
+          event.preventDefault();
+          socket.emit('gamecode',$('#gamecode').val());
+        });
+      });
+
+      socket.on('gc_isavalible', function (boo) {
+        if ( boo === '1' ) {
+          window.location.href = 'game.html?username='+$('#username').val()+'&gamecode='+$('#gamecode').val();
+        }
+        else {
+          if ($('#gamecode').val() === '') {
+          window.location.href = 'game.html?username='+$('#username').val();
+          }
+          else {window.alert('Gamecode nicht vergeben');}
+        }
+      });
+
+    </script>
+
+  </body>
+</html>
