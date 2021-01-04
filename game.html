@@ -10,7 +10,7 @@
     </header>
 
     <section class="left">
-      <h2> Schluckspecht: Das Spiel </h2>
+      <h2 id="spieltitel"> Schluckspecht: Das Spiel </h2>
     </section>
 
     <section class="right">
@@ -33,50 +33,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script> var socket = io(); </script>
 
-    <script>
-    var players = [];
-    $(function(){
-      var username = getParameterByName('username');
-      if (username.length < 2) {
-        username = window.prompt('What is your Name?');
-      }
-      socket.emit('username', username);
-
-
-
-      socket.on('currOnline', function(currOnline) {
-        players = currOnline;
-        doOnlineL();
-      });
-
-      $('form').submit(function(event){
-        event.preventDefault();
-        socket.emit('nachricht',$('#cn').val());
-        $('#cn').val('');
-        return false;
-      });
-
-      socket.on('nachricht', function(msg){
-        $('#nachrichten').append($('<li>').text(msg));
-      })
-    });
-
-    function doOnlineL () {
-        $('#currOnline').empty();
-        document.getElementById('currOnline').innerHTML =
-        '<li>' + players.join('</li><li>') + '</li>'
-    };
-
-    function getParameterByName (name, url = window.location.href) {
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    };
-
-    </script>
+    <script src="/game.js"></script>
 
   </body>
 </html>
