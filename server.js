@@ -33,7 +33,7 @@ var lineid = 0;
 //console.log('Spieler in '+ room[lineid].rname + ': '+room[lineid].players);
 console.log(util.inspect(room));
 */
-
+//hallo
 //https://stackoverflow.com/questions/9422756/search-a-javascript-object-for-a-property-with-a-specific-value
 function findprop (id, ) {
   for (var key in id) {
