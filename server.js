@@ -123,7 +123,6 @@ io.on('connection', (socket) => {
     eval('room'+room+'.addPlayer(id,socketuser)');
     socket.emit('your_room_is', room);
     eval("console.log('Inspect room: '+ util.inspect(room"+room+"))");
-    findprop('jan');
   });
 
   socket.on('joinroom', (room) => {
