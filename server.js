@@ -35,7 +35,7 @@ console.log(util.inspect(room));
 */
 //hallo
 //https://stackoverflow.com/questions/9422756/search-a-javascript-object-for-a-property-with-a-specific-value
-function findprop (id, ) {
+function findprop (id, query) {
   for (var key in id) {
     var value = id[key];
     if (typeof value === 'object') {
