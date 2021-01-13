@@ -1,4 +1,3 @@
-//Test für Github 2
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -65,8 +64,10 @@ function Player (socketid, nickname) {
 	this.pname=nickname;
 };
 
+
 var testraum = new Room ('Adminraum');
 testraum.addPlayer('0001','Jan');
+
 
 
 io.on('connection', (socket) => {
