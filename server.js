@@ -31,13 +31,21 @@ function findprop (id, query) {
 
 function Room (rname) {
   this.rname=rname;
-  this.player = {
-	};
+  this.player = {};
+  this.players  = [];
   this.addPlayer = function(sid,pname) {
-	eval('this.player.id'+sid+'= new Player (sid,pname)');
+	  eval('this.player.id'+sid+'= new Player (sid,pname)');
+    this.players.push(pname);
+    console.log('Ausgabe nach add to players: '+this.players);
   },this;
   this.removePlayer = function(sid) {
-	eval('delete this.player.id'+sid);
+    eval("pname = this.player.id"+sid+".pname");
+	  eval('delete this.player.id'+sid);
+    const index = this.players.indexOf(pname);
+    if (index > -1) {
+      this.players.splice(index, 1);
+    };
+    console.log('Ausgabe nach remove from players: '+this.players);
   },this;
 };
 
@@ -72,8 +80,9 @@ io.on('connection', (socket) => {
       //io.emit('nachricht', name + '  connected');
       socketuser = name;
 //      players[socket.id]={username: name, room: ''};
-      players.push(name);
-      io.emit('currOnline', players);
+//      players.push(name);
+      //io.emit('currOnline', players);
+
 //      console.log('Players: '+players);
     }
   });
@@ -82,16 +91,20 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     if (socketuser === undefined || socketuser === null) {} else {
       console.log(socketuser +' disconnected');
-      io.emit('nachricht', socketuser + '  disconnected');
-      const index = players.indexOf(socketuser);
+//      io.emit('nachricht', socketuser + '  disconnected');
+/*      const index = players.indexOf(socketuser);
       if (index > -1) {
       players.splice(index, 1);
+    }*/
       if (checkRoom(room)===1){
+        eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' disconnected')");
         eval('rooms.room'+room+'.removePlayer(id)');
+        eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
       };
-      io.emit('currOnline', players);
+//      io.emit('currOnline', players);
 //      console.log(players)
-      }
+
+
     }
   });
 
@@ -125,8 +138,9 @@ console.log('-------------------------------------------------------------------
 //    console.log('Clean ID: '+id);
     eval('rooms.room'+room+'.addPlayer(id,socketuser)');
     socket.emit('your_room_is', room);
-    eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
+//    eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
     eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
+    eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
   });
 
   socket.on('joinroom', (jroom) => {
@@ -138,10 +152,12 @@ console.log('-------------------------------------------------------------------
 //    console.log('Clean ID: '+id);
     if (checkRoom(room) === 1) {
       eval('rooms.room'+room+'.addPlayer(id,socketuser)');
+      eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
+//      eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
+      eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
     };
     socket.emit('your_room_is', room);
-    eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
-    eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
+
   });
 
 });
