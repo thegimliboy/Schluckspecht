@@ -46,9 +46,16 @@ function Player (socketid, nickname) {
 	this.pname=nickname;
 };
 
+function checkRoom (gc) {
+  var result;
+  eval("if (rooms.room"+gc+" == undefined) {result = 0;} else {result = 1;}");
+  return result
+};
 
-var testraum = new Room ('Adminraum');
-testraum.addPlayer('0001','Jan');
+//Vielleicht unnötig
+function msg_to_room (room, topic, msg) {
+      eval("io.to(room).emit(topic, msg)");
+};
 
 var rooms = {};
 
@@ -61,12 +68,13 @@ io.on('connection', (socket) => {
   socket.on('username', (name) => {
     if (name === undefined || name === null) {} else {
       console.log(name+' connected; ID='+socket.id);
-      io.emit('nachricht', name + '  connected');
+
+      //io.emit('nachricht', name + '  connected');
       socketuser = name;
 //      players[socket.id]={username: name, room: ''};
       players.push(name);
       io.emit('currOnline', players);
-      console.log('Players: '+players);
+//      console.log('Players: '+players);
     }
   });
 
@@ -78,16 +86,23 @@ io.on('connection', (socket) => {
       const index = players.indexOf(socketuser);
       if (index > -1) {
       players.splice(index, 1);
+      if (checkRoom(room)===1){
+        eval('rooms.room'+room+'.removePlayer(id)');
+      };
       io.emit('currOnline', players);
-      console.log(players)
+//      console.log(players)
       }
     }
   });
 
   socket.on('nachricht', (msg) => {
     eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+': '+msg)");
-      eval("io.to(room).emit('nachricht', room)");
+//      eval("io.to(room).emit('nachricht', room)");
+      console.log('Chat in '+room+': '+socketuser+': '+msg);
     //io.emit('nachricht', socketuser+': '+msg);
+/*console.log('--------------------------------------------------------------------------------------------------------')
+console.log('Inspect socket: '+util.inspect(socket.adapter.sids))
+console.log('--------------------------------------------------------------------------------------------------------')*/
   });
 
   socket.on('gamecode', (gc) => {
@@ -101,7 +116,9 @@ io.on('connection', (socket) => {
   socket.on('newroom',() => {
     function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
     room = getRandomInt(100000);
+    room = room + '';
     socket.join(room);
+    //eval("socket.join('"+room+"')");
     eval('rooms.room'+room+' = new Room (room)');
     id = socket.id;
     id = id.replace(/[^a-zA-Z ]/g, "");
@@ -109,16 +126,21 @@ io.on('connection', (socket) => {
     eval('rooms.room'+room+'.addPlayer(id,socketuser)');
     socket.emit('your_room_is', room);
     eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
+    eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
   });
 
   socket.on('joinroom', (jroom) => {
     room = jroom;
+    //eval("socket.join('"+room+"')");
     socket.join(room);
     id = socket.id;
     id = id.replace(/[^a-zA-Z ]/g, "");
-    console.log('Clean ID: '+id);
-    eval('rooms.room'+room+'.addPlayer(id,socketuser)');
+//    console.log('Clean ID: '+id);
+    if (checkRoom(room) === 1) {
+      eval('rooms.room'+room+'.addPlayer(id,socketuser)');
+    };
     socket.emit('your_room_is', room);
+    eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
     eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
   });
 

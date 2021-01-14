@@ -1,3 +1,5 @@
+//Todo: Keine leeren Nachrichten abschicken
+
 var players = [];
 $(function(){
   var username = getParameterByName('username');
