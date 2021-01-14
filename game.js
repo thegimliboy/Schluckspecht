@@ -4,6 +4,7 @@ $(function(){
   if (username.length < 2) {
     username = window.prompt('What is your Name?');
   }
+
   socket.emit('username', username);
 
   var gamecode = getParameterByName('gamecode');
@@ -21,6 +22,7 @@ $(function(){
       console.log('new room: '+room);
       document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+room;
   });
+
 
   socket.on('currOnline', function(currOnline) {
     players = currOnline;
