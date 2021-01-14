@@ -22,7 +22,7 @@ $(function(){
   socket.on('your_room_is', (room) => {
       gamecode = room;
       console.log('new room: '+room);
-      document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+room;
+      document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+room+' \t | Username: '+username;
   });
 
 

@@ -1,3 +1,5 @@
+//Todo: Gameroom Admin, welcher this.players[1] ist.
+//Todo: Kick User
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -13,21 +15,7 @@ server.listen(3001, function() {
 app.use(express.static(__dirname + '/'));
 
 
-var players = [];
-
-
-//https://stackoverflow.com/questions/9422756/search-a-javascript-object-for-a-property-with-a-specific-value
-function findprop (id, query) {
-  for (var key in id) {
-    var value = id[key];
-    if (typeof value === 'object') {
-      searchid(value, query);
-    }
-    if (value === query) {
-      console.log('property=' + key + ' value=' + value);
-    }
-  }
-};
+//var players = [];
 
 function Room (rname) {
   this.rname=rname;
@@ -36,7 +24,7 @@ function Room (rname) {
   this.addPlayer = function(sid,pname) {
 	  eval('this.player.id'+sid+'= new Player (sid,pname)');
     this.players.push(pname);
-    console.log('Ausgabe nach add to players: '+this.players);
+//    console.log('Ausgabe nach add to players: '+this.players);
   },this;
   this.removePlayer = function(sid) {
     eval("pname = this.player.id"+sid+".pname");
@@ -45,7 +33,7 @@ function Room (rname) {
     if (index > -1) {
       this.players.splice(index, 1);
     };
-    console.log('Ausgabe nach remove from players: '+this.players);
+//    console.log('Ausgabe nach remove from players: '+this.players);
   },this;
 };
 
@@ -109,7 +97,9 @@ io.on('connection', (socket) => {
   });
 
   socket.on('nachricht', (msg) => {
-    eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+': '+msg)");
+    if (checkRoom(room)===1){
+      eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+': '+msg)");
+    };
 //      eval("io.to(room).emit('nachricht', room)");
       console.log('Chat in '+room+': '+socketuser+': '+msg);
     //io.emit('nachricht', socketuser+': '+msg);
