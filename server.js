@@ -15,27 +15,9 @@ app.use(express.static(__dirname + '/'));
 
 var players = [];
 
-/*
-var testplayer = {
-  username: "",
-  room: ""
-}
-testplayer['testname'] = {username: 'wie der name schon sagt', room: 'nicht benannt'}
-console.log('tp1: '+testplayer['testname'].username)
 
-
-var room = {};
-room['testraum'] = {rname: "Entwickler", players: ['jan','lala','kubi']}
-room['testraum2'] = {rname: "Andere", players: ['1','2','3']}
-var roomid = 'testraum2';
-console.log('Spieler in '+ room[roomid].rname + ': '+room[roomid].players);
-var lineid = 0;
-//console.log('Spieler in '+ room[lineid].rname + ': '+room[lineid].players);
-console.log(util.inspect(room));
-*/
-//hallo
 //https://stackoverflow.com/questions/9422756/search-a-javascript-object-for-a-property-with-a-specific-value
-function findprop (id, ) {
+function findprop (id, query) {
   for (var key in id) {
     var value = id[key];
     if (typeof value === 'object') {
@@ -64,14 +46,17 @@ function Player (socketid, nickname) {
 	this.pname=nickname;
 };
 
+
 var testraum = new Room ('Adminraum');
 testraum.addPlayer('0001','Jan');
 
+var rooms = {};
 
 io.on('connection', (socket) => {
 
   var socketuser;
   var id;
+  var room;
 
   socket.on('username', (name) => {
     if (name === undefined || name === null) {} else {
@@ -100,14 +85,15 @@ io.on('connection', (socket) => {
   });
 
   socket.on('nachricht', (msg) => {
-    io.emit('nachricht', socketuser+': '+msg);
+    eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+': '+msg)");
+      eval("io.to(room).emit('nachricht', room)");
+    //io.emit('nachricht', socketuser+': '+msg);
   });
 
   socket.on('gamecode', (gc) => {
-    var room = socket.adapter.rooms[gc];
-
-//        console.log(util.inspect(room));
-    if (room === undefined ) {io.emit('gc_isavalible', '0');} else {
+    var gc_exists;
+    eval("if (rooms.room"+gc+" == undefined) {} else {gc_exists = 1}");
+    if (gc_exists === undefined ) {io.emit('gc_isavalible', '0');} else {
       io.emit('gc_isavalible', '1');
     }
   });
@@ -116,22 +102,24 @@ io.on('connection', (socket) => {
     function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
     room = getRandomInt(100000);
     socket.join(room);
-    eval('var room'+room+' = new Room (room)');
+    eval('rooms.room'+room+' = new Room (room)');
     id = socket.id;
     id = id.replace(/[^a-zA-Z ]/g, "");
 //    console.log('Clean ID: '+id);
-    eval('room'+room+'.addPlayer(id,socketuser)');
+    eval('rooms.room'+room+'.addPlayer(id,socketuser)');
     socket.emit('your_room_is', room);
-    eval("console.log('Inspect room: '+ util.inspect(room"+room+"))");
+    eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
   });
 
-  socket.on('joinroom', (room) => {
+  socket.on('joinroom', (jroom) => {
+    room = jroom;
     socket.join(room);
     id = socket.id;
     id = id.replace(/[^a-zA-Z ]/g, "");
     console.log('Clean ID: '+id);
-    eval('room'+room+'.addPlayer(id,socketuser)');
+    eval('rooms.room'+room+'.addPlayer(id,socketuser)');
     socket.emit('your_room_is', room);
+    eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
   });
 
 });
