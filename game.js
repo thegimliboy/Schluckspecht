@@ -15,8 +15,14 @@ $(function(){
     console.log('new room requested');
   }
   else {
-    socket.emit('joinroom', gamecode);
-    console.log('requested to join room '+gamecode)
+    socket.emit('gamecode', gamecode);
+    socket.on('gc_isavalible', function (boo) {
+      if (boo === '1' ) {
+        socket.emit('joinroom', gamecode);
+        console.log('requested to join room '+gamecode)
+      }
+      else {window.alert('Gamecode nicht vergeben!')}
+    });
   }
 
   socket.on('your_room_is', (room) => {
@@ -40,7 +46,7 @@ $(function(){
 
   socket.on('nachricht', function(msg){
     $('#nachrichten').append($('<li>').text(msg));
-  })
+  });
 });
 
 function doOnlineL () {
