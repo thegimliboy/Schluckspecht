@@ -1,9 +1,7 @@
 //Todo: Gameroom Admin, welcher this.players[1] ist.
 //Todo: Kick User
-//Todo: Fehlermeldung bei Zugriff per URL auf nicht vorhandenen Gamecode
 //Todo: Keine Doppelten Usernames IN EINEM RAUM
 //Todo: Grafik machen für join und game
-//Todo: Keine leeren Chatnachrichten
 //Todo: Gamcode <10000  &  >100000
 var express = require('express');
 var app = express();
@@ -101,8 +99,10 @@ io.on('connection', (socket) => {
   });
 
   socket.on('nachricht', (msg) => {
-    if (checkRoom(room)===1){
-      eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+': '+msg)");
+    if (msg === '') {} else {
+      if (checkRoom(room)===1){
+        eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+': '+msg)");
+      };
     };
 //      eval("io.to(room).emit('nachricht', room)");
       console.log('Chat in '+room+': '+socketuser+': '+msg);
@@ -119,6 +119,15 @@ console.log('-------------------------------------------------------------------
       socket.emit('gc_isavalible', '1');
     }
   });
+
+  socket.on('checkuser', (cu) =>  {
+    var cu_exists;
+    if (cu_exists === undefined ) {socket.emit('cu_isavailable', '0');}
+    else {
+      socket.emit('cu_isavailable', '1');
+    }
+  });
+
 
   socket.on('newroom',() => {
     function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}

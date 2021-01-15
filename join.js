@@ -1,9 +1,11 @@
 var ww;
 var gamecode;
+
   $(function(){
     $('form').submit(function(event){
       event.preventDefault();
       socket.emit('gamecode',$('#gamecode').val());
+      socket.emit('checkuser',$('#username').val());
     });
   });
 
