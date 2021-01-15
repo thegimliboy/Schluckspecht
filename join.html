@@ -21,29 +21,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script> var socket = io(); </script>
-    <script>
-    var ww;
-    var gamecode;
-      $(function(){
-        $('form').submit(function(event){
-          event.preventDefault();
-          socket.emit('gamecode',$('#gamecode').val());
-        });
-      });
 
-      socket.on('gc_isavalible', function (boo) {
-        if ( boo === '1' ) {
-          window.location.href = 'game.html?username='+$('#username').val()+'&gamecode='+$('#gamecode').val();
-        }
-        else {
-          if ($('#gamecode').val() === '') {
-          window.location.href = 'game.html?username='+$('#username').val();
-          }
-          else {window.alert('Gamecode nicht vergeben');}
-        }
-      });
-
-    </script>
+    <script src="/join.js"></script>
 
   </body>
 </html>

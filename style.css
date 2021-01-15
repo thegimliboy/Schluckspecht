@@ -21,10 +21,8 @@ h1{
     width: 20%;
 }
 
-.oben {
-
-}
-
-.unten {
-
+.logo {
+  float: left;
+  height: 20px;
+  width: 20px;
 }
