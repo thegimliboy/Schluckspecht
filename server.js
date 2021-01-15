@@ -120,6 +120,15 @@ console.log('-------------------------------------------------------------------
     }
   });
 
+  socket.on('checkuser', (cu) =>  {
+    var cu_exists;
+    if (cu_exists === undefined ) {socket.emit('cu_isavailable', '0');}
+    else {
+      socket.emit('cu_isavailable', '1');
+    }
+  });
+
+
   socket.on('newroom',() => {
     function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
     room = getRandomInt(100000);
