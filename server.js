@@ -1,12 +1,16 @@
 //Todo: Gameroom Admin, welcher this.players[1] ist.
 //Todo: Kick User
+//Todo: Fehlermeldung bei Zugriff per URL auf nicht vorhandenen Gamecode
+//Todo: Keine Doppelten Usernames IN EINEM RAUM
+//Todo: Grafik machen für join und game
+//Todo: Keine leeren Chatnachrichten
+//Todo: Gamcode <10000  &  >100000
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
 const util = require('util');
-
 
 server.listen(3001, function() {
   console.log('Started 3001');
@@ -111,8 +115,8 @@ console.log('-------------------------------------------------------------------
   socket.on('gamecode', (gc) => {
     var gc_exists;
     eval("if (rooms.room"+gc+" == undefined) {} else {gc_exists = 1}");
-    if (gc_exists === undefined ) {io.emit('gc_isavalible', '0');} else {
-      io.emit('gc_isavalible', '1');
+    if (gc_exists === undefined ) {socket.emit('gc_isavalible', '0');} else {
+      socket.emit('gc_isavalible', '1');
     }
   });
 
