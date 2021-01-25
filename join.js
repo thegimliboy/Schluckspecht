@@ -1,5 +1,6 @@
 var ww;
 var gamecode;
+
   $(function(){
     $('form').submit(function(event){
       event.preventDefault();
