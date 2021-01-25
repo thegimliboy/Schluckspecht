@@ -1,6 +1,5 @@
-//Todo: Keine leeren Nachrichten abschicken
-
-var players = [];
+//var players = [];
+var room = {};
 $(function(){
   var username = getParameterByName('username');
   if (username.length < 2) {
@@ -32,8 +31,14 @@ $(function(){
   });
 
 
-  socket.on('currOnline', function(currOnline) {
+/*  socket.on('currOnline', function(currOnline) {
     players = currOnline;
+    doOnlineL();
+  });*/
+
+  socket.on('update_room', newroom => {
+    room = newroom;
+    console.log('Recieved room obj update')
     doOnlineL();
   });
 
@@ -52,7 +57,7 @@ $(function(){
 function doOnlineL () {
     $('#currOnline').empty();
     document.getElementById('currOnline').innerHTML =
-    '<li>' + players.join('</li><li>') + '</li>'
+    '<li>' + room.players.join('</li><li>') + '</li>'
 };
 
 function getParameterByName (name, url = window.location.href) {
@@ -63,3 +68,15 @@ function getParameterByName (name, url = window.location.href) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };
+
+
+/*
+var canvas2 = document.getElementById("canvas2");
+var ctx2 = canvas2.getContext("2d");
+ctx2.fillStyle = "blue";
+ctx2.fillRect(0, 0, canvas2.width, canvas2.height);*/
+
+var canvas1 = document.getElementById("Buttons");
+var ctx1 = canvas1.getContext("2d");
+ctx1.fillStyle = "red";
+ctx1.fillRect(0, 0, canvas1.width, canvas1.height);

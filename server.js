@@ -42,6 +42,9 @@ function Room (rname) {
 function Player (socketid, nickname) {
 	this.sid=socketid;
 	this.pname=nickname;
+  this.gamestate=0;
+  this.getrunken=0;
+  this.isAdmin=0;
 };
 
 function checkRoom (gc) {
@@ -89,7 +92,8 @@ io.on('connection', (socket) => {
       if (checkRoom(room)===1){
         eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' disconnected')");
         eval('rooms.room'+room+'.removePlayer(id)');
-        eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+//        eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+        eval("io.to(room).emit('update_room', rooms.room"+room+")");
       };
 //      io.emit('currOnline', players);
 //      console.log(players)
@@ -143,7 +147,9 @@ console.log('-------------------------------------------------------------------
     socket.emit('your_room_is', room);
 //    eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
     eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
-    eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+//    eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+    eval("rooms.room"+room+".player.id"+id+".isAdmin = 1");
+    eval("io.to(room).emit('update_room', rooms.room"+room+")");
   });
 
   socket.on('joinroom', (jroom) => {
@@ -157,7 +163,8 @@ console.log('-------------------------------------------------------------------
       eval('rooms.room'+room+'.addPlayer(id,socketuser)');
       eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
 //      eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
-      eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+//      eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+      eval("io.to(room).emit('update_room', rooms.room"+room+")");
     };
     socket.emit('your_room_is', room);
 

@@ -21,8 +21,13 @@ h1{
     width: 20%;
 }
 
-.logo {
+#logo {
+  display: table-cell;
+  width: 100%;
+}
+
+#logo img {
+  width: 30%;
+  height: auto;
   float: left;
-  height: 20px;
-  width: 20px;
 }
