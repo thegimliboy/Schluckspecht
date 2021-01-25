@@ -37,6 +37,7 @@ function Room (rname) {
     };
 //    console.log('Ausgabe nach remove from players: '+this.players);
   },this;
+  this.ready = 0;
 };
 
 function Player (socketid, nickname) {
@@ -45,6 +46,7 @@ function Player (socketid, nickname) {
   this.gamestate=0;
   this.getrunken=0;
   this.isAdmin=0;
+  this.ready=0;
 };
 
 function checkRoom (gc) {
@@ -167,7 +169,20 @@ console.log('-------------------------------------------------------------------
       eval("io.to(room).emit('update_room', rooms.room"+room+")");
     };
     socket.emit('your_room_is', room);
+  });
 
+  socket.on('ready', () => {
+    eval("rooms.room"+room+".player.id"+id+".ready = 1");
+    checkReady(room);
   });
 
 });
+
+function checkReady (room) {
+  //Logik ob der Raum bereit ist
+  
+if (ready === 1) {
+  startgame();
+}
+
+}

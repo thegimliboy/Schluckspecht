@@ -31,3 +31,9 @@ h1{
   height: auto;
   float: left;
 }
+
+
+table {
+  border-spacing:0;
+  border-collapse: collapse;
+}
