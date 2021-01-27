@@ -52,20 +52,27 @@ function checkReady (room) {
   if (checkRoom(room)===1){
     var count = 0;
     var divider = 0;
-
-    eval("for (const property in rooms.room"+room+".player) {eval('value = rooms.room'+room+'.player.'+property+'.ready');count = count + value;divider++;};")
-    eval("if (count===divider)  {rooms.room"+room+".ready = 1; console.log('"+room+" is ready')} else {rooms.room"+room+".ready = 0; console.log('"+room+" is not ready')}");
-    eval("if (rooms.room"+room+".ready === 1) {startGame(room);}");
+    if (eval("rooms.room"+room+".running") === 0) {
+      eval("for (const property in rooms.room"+room+".player) {eval('value = rooms.room'+room+'.player.'+property+'.ready');count = count + value;divider++;};")
+      eval("if (count===divider)  {rooms.room"+room+".ready = 1; console.log('"+room+" is ready')} else {rooms.room"+room+".ready = 0; console.log('"+room+" is not ready')}");
+      eval("if (rooms.room"+room+".ready === 1) {startGame(room);}");
+    }
+    //else {eval("console.log('Checked room "+room+" but it was already running')")}
   }
 };
 
 function startGame(room) {
   //Init
   if (checkRoom(room)===1){
-    eval("rooms.room"+room+".running = 1");
+    if (eval("rooms.room"+room+".running") === 0) {
+      eval("rooms.room"+room+".running = 1");
+      eval("io.to(room).emit('update_room', rooms.room"+room+")");
+      io.to(room).emit('gamestart');
+      eval("console.log('Started game in room "+room+"')");
+    }
+    else {eval("console.log('"+room+" is already running')")}
   }
-  eval("io.to(room).emit('update_room', rooms.room"+room+")");
-  io.to(room).emit('gamestart');
+
 };
 
 function checkRoom (gc) {
@@ -186,6 +193,7 @@ console.log('-------------------------------------------------------------------
 //      eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
 //      eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
       eval("io.to(room).emit('update_room', rooms.room"+room+")");
+      if (eval("rooms.room"+room+".running === 1")) {socket.emit('gamestart')};
     };
     socket.emit('your_room_is', room);
   });
