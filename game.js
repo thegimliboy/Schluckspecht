@@ -30,12 +30,6 @@ $(function(){
       document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+room+' \t | Username: '+username;
   });
 
-
-/*  socket.on('currOnline', function(currOnline) {
-    players = currOnline;
-    doOnlineL();
-  });*/
-
   socket.on('update_room', newroom => {
     room = newroom;
     console.log('Recieved room obj update')
@@ -52,7 +46,22 @@ $(function(){
   socket.on('nachricht', function(msg){
     $('#nachrichten').append($('<li>').text(msg));
   });
+
+  socket.on('gamestart', () =>{
+    console.log("Game started");
+    for (var i=1;i<26;i++){
+      if (i < 10) {eval("feld = document.getElementById('canvas0"+i+"')");} else {eval("feld = document.getElementById('canvas"+i+"')");};
+      //feld = document.getElementById('canvas01')
+      var ctx = feld.getContext("2d");
+      ctx.font = "30px Arial";
+      ctx.fillText(i, 10, 50);
+    }
+  });
 });
+
+function Ready () {
+  socket.emit('ready');
+};
 
 function doOnlineL () {
     $('#currOnline').empty();
@@ -68,13 +77,6 @@ function getParameterByName (name, url = window.location.href) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };
-
-
-/*
-var canvas2 = document.getElementById("canvas2");
-var ctx2 = canvas2.getContext("2d");
-ctx2.fillStyle = "blue";
-ctx2.fillRect(0, 0, canvas2.width, canvas2.height);*/
 
 var canvas1 = document.getElementById("Buttons");
 var ctx1 = canvas1.getContext("2d");
