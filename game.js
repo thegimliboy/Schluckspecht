@@ -49,6 +49,7 @@ $(function(){
 
   socket.on('gamestart', () =>{
     console.log("Game started");
+
     for (var i=1;i<26;i++){
       if (i < 10) {eval("feld = document.getElementById('canvas0"+i+"')");} else {eval("feld = document.getElementById('canvas"+i+"')");};
       //feld = document.getElementById('canvas01')

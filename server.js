@@ -1,14 +1,20 @@
+//Inspiration: Picolo und Saufen.io
 //Todo: Gameroom Admin, welcher this.players[1] ist.
 //Todo: Kick User
 //Todo: Keine Doppelten Usernames IN EINEM RAUM
 //Todo: Grafik machen für join und game
 //Todo: Gamcode <10000  &  >100000
+//FELDER OBJECT, darin einzelne Feld objecte: Canvasid, Feldnummer, Kategorie, Frage wird jedes mal auf Server zufällig ausgewählt
+//Server.js sucht zufällige Kategorie und Frage aus, die der Client aus Aufgaben.js abfragt.
+//Spieler am zug steht in players, client kennt eigene ID
+//Anzeigen, wer aktuell am Zug ist
+//Regel, Liste mit Regel, Regeln begrenz auf Runden (neue function "nextround()"), window.promt wenn regel abgelaufen
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
-const util = require('util');
+//const util = require('util');
 
 server.listen(3001, function() {
   console.log('Started 3001');
@@ -37,6 +43,11 @@ function Room (rname) {
   },this;
   this.ready = 0;
   this.running = 0;
+  this.round = 0;
+  this.fields = {};
+  this.addField = function(feldnr,categoryID) {
+    eval("this.fields.canvas"+feldnr+" = new Field (feldnr, categoryID)");
+  },this;
 };
 
 function Player (socketid, nickname) {
@@ -46,6 +57,11 @@ function Player (socketid, nickname) {
   this.getrunken=0;
   this.isAdmin=0;
   this.ready=0;
+};
+
+function Field (feldnr,categoryID) {
+  this.location=feldnr;
+  this.category=categoryID;
 };
 
 function checkReady (room) {
@@ -61,14 +77,17 @@ function checkReady (room) {
   }
 };
 
+var fields = {};
 function startGame(room) {
   //Init
   if (checkRoom(room)===1){
     if (eval("rooms.room"+room+".running") === 0) {
       eval("rooms.room"+room+".running = 1");
-      eval("io.to(room).emit('update_room', rooms.room"+room+")");
+      //eval("io.to(room).emit('update_room', rooms.room"+room+")");
       io.to(room).emit('gamestart');
       eval("console.log('Started game in room "+room+"')");
+      eval("rooms.room"+room+".running = 1");
+      eval("io.to(room).emit('update_room', rooms.room"+room+")");
     }
     else {eval("console.log('"+room+" is already running')")}
   }
