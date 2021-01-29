@@ -1,14 +1,21 @@
+//Inspiration: Picolo und Saufen.io
 //Todo: Gameroom Admin, welcher this.players[1] ist.
 //Todo: Kick User
 //Todo: Keine Doppelten Usernames IN EINEM RAUM
 //Todo: Grafik machen für join und game
 //Todo: Gamcode <10000  &  >100000
+//FELDER OBJECT, darin einzelne Feld objecte: Canvasid, Feldnummer, Kategorie, Frage wird jedes mal auf Server zufällig ausgewählt
+//Server.js sucht zufällige Kategorie und Frage aus, die der Client aus Aufgaben.js abfragt.
+//Spieler am zug steht in players, client kennt eigene ID
+//Anzeigen, wer aktuell am Zug ist
+//Regel, Liste mit Regel, Regeln begrenz auf Runden (neue function "nextround()"), window.promt wenn regel abgelaufen
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
-const util = require('util');
+var getExcercise = require('./aufgaben');
+//const util = require('util');
 
 server.listen(3001, function() {
   console.log('Started 3001');
@@ -16,8 +23,6 @@ server.listen(3001, function() {
 
 app.use(express.static(__dirname + '/'));
 
-
-//var players = [];
 
 function Room (rname) {
   this.rname=rname;
@@ -37,11 +42,63 @@ function Room (rname) {
     };
 //    console.log('Ausgabe nach remove from players: '+this.players);
   },this;
+  this.ready = 0;
+  this.running = 0;
+  this.round = 0;
+  this.fields = {};
+  this.addField = function(feldnr,categoryID) {
+    eval("this.fields.canvas"+feldnr+" = new Field (feldnr, categoryID)");
+  },this;
 };
 
 function Player (socketid, nickname) {
 	this.sid=socketid;
 	this.pname=nickname;
+  this.gamestate=0;
+  this.getrunken=0;
+  this.isAdmin=0;
+  this.ready=0;
+};
+
+function Field (feldnr) {
+  this.location=feldnr;
+  this.category=getExcercise();
+};
+
+function checkReady (room) {
+  if (checkRoom(room)===1){
+    var count = 0;
+    var divider = 0;
+    if (eval("rooms.room"+room+".running") === 0) {
+      eval("for (const property in rooms.room"+room+".player) {eval('value = rooms.room'+room+'.player.'+property+'.ready');count = count + value;divider++;};")
+      eval("if (count===divider)  {rooms.room"+room+".ready = 1; console.log('"+room+" is ready')} else {rooms.room"+room+".ready = 0; console.log('"+room+" is not ready')}");
+      eval("if (rooms.room"+room+".ready === 1) {startGame(room);}");
+    }
+    //else {eval("console.log('Checked room "+room+" but it was already running')")}
+  }
+};
+
+var fields = {};
+function startGame(room) {
+  //Init
+  if (checkRoom(room)===1){
+    if (eval("rooms.room"+room+".running") === 0) {
+      eval("rooms.room"+room+".running = 1");
+      //eval("io.to(room).emit('update_room', rooms.room"+room+")");
+      io.to(room).emit('gamestart');
+      eval("console.log('Started game in room "+room+"')");
+      eval("rooms.room"+room+".running = 1");
+
+      for (var i=1;i<26;i++){
+        if (i < 10) {eval("rooms.room"+room+".addField("+i+")")} else {eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");};
+
+      }
+
+      eval("io.to(room).emit('update_room', rooms.room"+room+")");
+    }
+    else {eval("console.log('"+room+" is already running')")}
+  }
+
 };
 
 function checkRoom (gc) {
@@ -89,7 +146,8 @@ io.on('connection', (socket) => {
       if (checkRoom(room)===1){
         eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' disconnected')");
         eval('rooms.room'+room+'.removePlayer(id)');
-        eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+//        eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+        eval("io.to(room).emit('update_room', rooms.room"+room+")");
       };
 //      io.emit('currOnline', players);
 //      console.log(players)
@@ -130,6 +188,7 @@ console.log('-------------------------------------------------------------------
 
 
   socket.on('newroom',() => {
+    //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/math.random
     function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
     room = getRandomInt(100000);
     room = room + '';
@@ -143,7 +202,9 @@ console.log('-------------------------------------------------------------------
     socket.emit('your_room_is', room);
 //    eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
     eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
-    eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+//    eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+    eval("rooms.room"+room+".player.id"+id+".isAdmin = 1");
+    eval("io.to(room).emit('update_room', rooms.room"+room+")");
   });
 
   socket.on('joinroom', (jroom) => {
@@ -157,10 +218,25 @@ console.log('-------------------------------------------------------------------
       eval('rooms.room'+room+'.addPlayer(id,socketuser)');
       eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
 //      eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
-      eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+//      eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+      eval("io.to(room).emit('update_room', rooms.room"+room+")");
+      if (eval("rooms.room"+room+".running === 1")) {socket.emit('gamestart')};
     };
     socket.emit('your_room_is', room);
+  });
 
+  socket.on('ready', () => {
+    if (checkRoom(room)===1){
+      if (eval("rooms.room"+room+".player.id"+id+".ready") === 0) {
+        //console.log("From 0 to 1");
+        eval("rooms.room"+room+".player.id"+id+".ready = 1");
+      }
+      else {
+        //console.log("From 1 to 0");
+        eval("rooms.room"+room+".player.id"+id+".ready = 0");
+      }
+      checkReady(room);
+    }
   });
 
 });
