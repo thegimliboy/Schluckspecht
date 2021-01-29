@@ -14,6 +14,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
+var getExcercise = require('./aufgaben');
 //const util = require('util');
 
 server.listen(3001, function() {
@@ -59,9 +60,9 @@ function Player (socketid, nickname) {
   this.ready=0;
 };
 
-function Field (feldnr,categoryID) {
+function Field (feldnr) {
   this.location=feldnr;
-  this.category=categoryID;
+  this.category=getExcercise();
 };
 
 function checkReady (room) {
@@ -87,6 +88,12 @@ function startGame(room) {
       io.to(room).emit('gamestart');
       eval("console.log('Started game in room "+room+"')");
       eval("rooms.room"+room+".running = 1");
+
+      for (var i=1;i<26;i++){
+        if (i < 10) {eval("rooms.room"+room+".addField("+i+")")} else {eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");};
+
+      }
+
       eval("io.to(room).emit('update_room', rooms.room"+room+")");
     }
     else {eval("console.log('"+room+" is already running')")}
@@ -181,6 +188,7 @@ console.log('-------------------------------------------------------------------
 
 
   socket.on('newroom',() => {
+    //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/math.random
     function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
     room = getRandomInt(100000);
     room = room + '';
