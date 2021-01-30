@@ -16,7 +16,18 @@ function getExcercise(categoryID, excerciseID){
     return (getRandomInt(countCategories())+1);
   }
 
-  switch (categoryID){
+ for (var i=1;i<countCategories()+1;i++){
+   switch (categoryID){
+     case i:
+      //eval("console.log('Kategorie "+i+"')");
+      checkEx(excerciseID);
+      return checkEx(excerciseID) || eval("(getRandomInt(excercises.K"+i+".length))");
+    break;
+    default:
+    //console.log(i+" war es nicht");
+    }
+ }
+  /*switch (categoryID){
       case 1:
         //console.log('Kategorie 1');
         checkEx(excerciseID);
@@ -35,7 +46,7 @@ function getExcercise(categoryID, excerciseID){
 
       default:
         console.log('Keine korrekte ID eingegeben')
-  }
+  }*/
 
   function checkEx(exerciseID){
     if (typeof excerciseID !== undefined){
@@ -61,7 +72,7 @@ var excercises = {
   ],
   K3: [
     'Jetzt in der dridde Kategorie',
-    'Still die zweite',
+    'Still die zweite'
   ]
 };
 
@@ -71,12 +82,16 @@ var excercises = {
 
 //console.log("Frage: "+getExcercise(getExcercise(),1));
 
+/*console.log("Erstelle feld1");
 var feld1 = {};
+console.log("Hole Kategorie")
 feld1.Kategorie = getExcercise();
+console.log("Hole FrageID")
 feld1.frageid = getExcercise(feld1.Kategorie);
+console.log("Hole Fragen als string")
 feld1.frage =getExcercise(feld1.Kategorie,feld1.frageid);
 
-console.log(util.inspect(feld1))
+console.log(util.inspect(feld1))*/
 
 //console.log(getExcercise());
 
