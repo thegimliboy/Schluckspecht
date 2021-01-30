@@ -6,9 +6,11 @@
 //Todo: Gamcode <10000  &  >100000
 //FELDER OBJECT, darin einzelne Feld objecte: Canvasid, Feldnummer, Kategorie, Frage wird jedes mal auf Server zufällig ausgewählt
 //Server.js sucht zufällige Kategorie und Frage aus, die der Client aus Aufgaben.js abfragt.
-//Spieler am zug steht in players, client kennt eigene ID
+//Spieler am zug steht in players object, client kennt eigene ID
 //Anzeigen, wer aktuell am Zug ist
 //Regel, Liste mit Regel, Regeln begrenz auf Runden (neue function "nextround()"), window.promt wenn regel abgelaufen
+//Room braucht room.fields.field.currentexercise{kategorieid, fragenid}
+//Was wenn ein Spieler erst später reinjoined?
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -23,6 +25,8 @@ server.listen(3001, function() {
 
 app.use(express.static(__dirname + '/'));
 
+//https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/math.random
+function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
 
 function Room (rname) {
   this.rname=rname;
@@ -58,12 +62,17 @@ function Player (socketid, nickname) {
   this.getrunken=0;
   this.isAdmin=0;
   this.ready=0;
+  this.hasTurn=0;
 };
 
 function Field (feldnr) {
   this.location=feldnr;
   this.category=getExcercise();
 };
+
+function updateRoom (room){
+  eval("io.to(room).emit('update_room', rooms.room"+room+")");
+}
 
 function checkReady (room) {
   if (checkRoom(room)===1){
@@ -95,11 +104,30 @@ function startGame(room) {
       }
 
       eval("io.to(room).emit('update_room', rooms.room"+room+")");
+      nextRound(room);
     }
     else {eval("console.log('"+room+" is already running')")}
   }
 
 };
+
+function nextRound(room) {
+  if (checkRoom(room)===1){
+    eval("rooms.room"+room+".round = rooms.room"+room+".hadTurn = 0");
+    eval("rooms.room"+room+".round = rooms.room"+room+".round + 1");
+    nextPlayer(room);
+    //updateRoom(room);
+  }
+};
+
+function nextPlayer(room) {
+  //Nächster Spieler bekommt hasTurn=1, bis players.length = hadTurn ist.
+  eval("if (rooms.room"+room+".round = rooms.room"+room+".hadTurn > rooms.room"+room+".players.length) {nextRound(room);}");
+
+  //Hier muss der nächster Spieler in der Reihenfolge hasTurn zugewiesen bekommen
+  eval("rooms.room"+room+".round = rooms.room"+room+".hadTurn = rooms.room"+room+".round = rooms.room"+room+".hadTurn + 1");
+  updateRoom(room);
+}
 
 function checkRoom (gc) {
   var result;
@@ -114,6 +142,7 @@ function msg_to_room (room, topic, msg) {
 
 var rooms = {};
 
+//io.on('connection', sockethandle)
 io.on('connection', (socket) => {
 
   var socketuser;
@@ -188,8 +217,6 @@ console.log('-------------------------------------------------------------------
 
 
   socket.on('newroom',() => {
-    //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/math.random
-    function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
     room = getRandomInt(100000);
     room = room + '';
     socket.join(room);
@@ -236,6 +263,13 @@ console.log('-------------------------------------------------------------------
         eval("rooms.room"+room+".player.id"+id+".ready = 0");
       }
       checkReady(room);
+    }
+  });
+
+  socket.on('roll', () => {
+    if (checkRoom(room)===1){
+            eval("if (rooms.room"+room+".player.id"+id+".hasTurn == 1){wuerfel = getRandomInt(6)+1;console.log('Gewürfelt: '+wuerfel);rooms.room"+room+".player.id"+id+".gamestate + wuerfel;nextPlayer(room);updateRoom(room)}")
+        //Würfellogik
     }
   });
 
