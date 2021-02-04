@@ -1,6 +1,7 @@
-//Todo: Keine leeren Nachrichten abschicken
-
-var players = [];
+//var players = [];
+//roll-button taucht erst auf wenn das gema ready ist
+//Bereit button verschwindet wenn das Spiel gestartet ist
+var room = {};
 $(function(){
   var username = getParameterByName('username');
   if (username.length < 2) {
@@ -31,9 +32,9 @@ $(function(){
       document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+room+' \t | Username: '+username;
   });
 
-
-  socket.on('currOnline', function(currOnline) {
-    players = currOnline;
+  socket.on('update_room', newroom => {
+    room = newroom;
+    console.log('Recieved room obj update')
     doOnlineL();
   });
 
@@ -47,12 +48,37 @@ $(function(){
   socket.on('nachricht', function(msg){
     $('#nachrichten').append($('<li>').text(msg));
   });
+
+  socket.on('yourTurn', function(){
+    document.getElementById('roll').style.visibility = 'visible';
+  });
+
+  socket.on('gamestart', () =>{
+    console.log("Game started");
+    document.getElementById('setReady').style.visibility = 'hidden';
+    for (var i=1;i<26;i++){
+      if (i < 10) {eval("feld = document.getElementById('canvas0"+i+"')");} else {eval("feld = document.getElementById('canvas"+i+"')");};
+      //feld = document.getElementById('canvas01')
+      var ctx = feld.getContext("2d");
+      ctx.font = "30px Arial";
+      ctx.fillText(i, 10, 50);
+    }
+  });
 });
+
+function Ready () {
+  socket.emit('ready');
+};
+
+function Roll () {
+  socket.emit('roll');
+  document.getElementById('roll').style.visibility = 'hidden'; //Wird wieder sichtbar durch sowas wie socket.on('yourTurn')
+};
 
 function doOnlineL () {
     $('#currOnline').empty();
     document.getElementById('currOnline').innerHTML =
-    '<li>' + players.join('</li><li>') + '</li>'
+    '<li>' + room.players.join('</li><li>') + '</li>'
 };
 
 function getParameterByName (name, url = window.location.href) {
@@ -63,3 +89,8 @@ function getParameterByName (name, url = window.location.href) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };
+
+var canvas1 = document.getElementById("Buttons");
+var ctx1 = canvas1.getContext("2d");
+ctx1.fillStyle = "red";
+ctx1.fillRect(0, 0, canvas1.width, canvas1.height);
