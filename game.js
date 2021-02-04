@@ -49,9 +49,16 @@ $(function(){
     $('#nachrichten').append($('<li>').text(msg));
   });
 
-  socket.on('yourTurn', function(){
-    document.getElementById('roll').style.visibility = 'visible';
+  socket.on('gamestate', function(rresult, currTurn){
+    $('#spielstand').empty();
+    //console.log(currTurn);
+    if (currTurn == 'Jetzt ist '+ username +' an der Reihe') {currTurn = 'Du bist dran'; document.getElementById('roll').style.visibility = 'visible';}
+    //console.log(currTurn);
+    $('#spielstand').append($('<li>').text(rresult));
+    $('#spielstand').append($('<li>').text(currTurn));
+    if (room.currQuestion == 'Not yet assigned') {} else {$('#spielstand').append($('<li>').text('Aufgabe: '+room.currQuestion))};
   });
+
 
   socket.on('gamestart', () =>{
     console.log("Game started");
@@ -72,7 +79,7 @@ function ready () {
 
 function roll () {
   socket.emit('roll');
-  //document.getElementById('roll').style.visibility = 'hidden'; //Wird wieder sichtbar durch sowas wie socket.on('yourTurn')
+  document.getElementById('roll').style.visibility = 'hidden'; //Wird wieder sichtbar durch sowas wie socket.on('yourTurn')
 };
 
 function doOnlineL () {

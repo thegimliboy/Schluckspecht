@@ -113,7 +113,7 @@ var excercises = {
   K3: [  //Spiel
     'Entweder nie mehr Zeit oder nie mehr Geld haben? Stimmt in der Gruppe ab. Die Verlierer trinken 4 Schlücke',
     'Reime auf "Bier". Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
-    'Reime auf '
+    //'Reime auf '
   ]
 };
 
