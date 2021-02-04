@@ -66,6 +66,7 @@ function Room (rname) {
   this.addField = function(feldnr) {
     eval("this.fields.canvas"+feldnr+" = new Field (feldnr)");
   },this;
+  this.hadTurn = 0;
 };
 
 function Player (socketid, nickname) {
@@ -127,9 +128,10 @@ function startGame(room) {
 
 function nextRound(room) {
   if (checkRoom(room)===1){
-    noTurn(room);
-    eval("rooms.room"+room+".round = rooms.room"+room+".hadTurn = 0");
-    eval("rooms.room"+room+".round = rooms.room"+room+".round + 1");
+    //noTurn(room);
+    console.log('Nächste Runde ist gestartet');
+    eval("rooms.room"+room+".hadTurn = 0");
+    eval("rooms.room"+room+".round = rooms.room"+room+".round + 1; console.log('Runde++')");
     nextPlayer(room);
     //updateRoom(room);
   }
@@ -137,12 +139,13 @@ function nextRound(room) {
 
 function nextPlayer(room) {
   //Nächster Spieler bekommt hasTurn=1, bis players.length = hadTurn ist.
-  eval("if (rooms.room"+room+".hadTurn >= rooms.room"+room+".players.length) {nextRound(room);} else {localhadTurn = rooms.room"+room+".hadTurn}");
+  console.log('hadTurn='+ eval("rooms.room"+room+".hadTurn") + '; players.length: '+ eval("rooms.room"+room+".players.length"));
+  eval("if (rooms.room"+room+".hadTurn == rooms.room"+room+".players.length) {console.log('next Round'); nextRound(room);} else { console.log('next Player');localhadTurn = rooms.room"+room+".hadTurn;}");
   eval("IDnextP = playerIDbyindex(rooms.room"+room+".player, rooms.room"+room+".players[localhadTurn])");
   eval("rooms.room"+room+".player."+IDnextP+".hasTurn = 1");
 
   //Hier muss der nächster Spieler in der Reihenfolge hasTurn zugewiesen bekommen
-  eval("rooms.room"+room+".round = rooms.room"+room+".hadTurn = rooms.room"+room+".round = rooms.room"+room+".hadTurn + 1");
+  //  eval("rooms.room"+room+".round = rooms.room"+room+".hadTurn = rooms.room"+room+".round = rooms.room"+room+".hadTurn + 1");
   updateRoom(room);
   //nextPlayer(room)
 }
@@ -285,7 +288,9 @@ console.log('-------------------------------------------------------------------
 
   socket.on('roll', () => {
     if (checkRoom(room)===1){
-            eval("if (rooms.room"+room+".player.id"+id+".hasTurn == 1){wuerfel = getRandomInt(6)+1;console.log('Gewürfelt: '+wuerfel);rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel;noTurn(room);nextPlayer(room);updateRoom(room)}");
+            //eval("rooms.room"+room+".hadTurn = rooms.room"+room+".hadTurn + 1");
+            eval("if (rooms.room"+room+".player.id"+id+".hasTurn == 1){wuerfel = getRandomInt(6)+1;console.log('Gewürfelt: '+wuerfel);rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel;rooms.room"+room+".hadTurn = rooms.room"+room+".hadTurn + 1;noTurn(room);nextPlayer(room);updateRoom(room)}");
+
             /*eval("localhadTurn = rooms.room"+room+".hadTurn");
             eval("IDnextP = playerIDbyindex(rooms.room"+room+".player, rooms.room"+room+".players[localhadTurn])");
             eval("rooms.room"+room+".round = rooms.room"+room+".hadTurn = rooms.room"+room+".round = rooms.room"+room+".hadTurn + 0");*/
@@ -297,7 +302,7 @@ console.log('-------------------------------------------------------------------
 
 function noTurn(room){
   //console.log("Versuche Zurückzusetzen");
-  eval("localhadTurn = rooms.room"+room+".hadTurn -1");
+  eval("localhadTurn = rooms.room"+room+".hadTurn - 1");
   //console.log("localhadTurn: "+ localhadTurn)
   eval("IDnextP = playerIDbyindex(rooms.room"+room+".player, rooms.room"+room+".players[localhadTurn])");
   //console.log(IDnextP)
