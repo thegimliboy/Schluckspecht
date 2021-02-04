@@ -26,10 +26,10 @@ $(function(){
     });
   }
 
-  socket.on('your_room_is', (room) => {
-      gamecode = room;
-      console.log('new room: '+room);
-      document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+room+' \t | Username: '+username;
+  socket.on('your_room_is', (gameroom) => {
+      gamecode = gameroom;
+      console.log('new room: '+gameroom);
+      document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+gameroom+' \t | Username: '+username;
   });
 
   socket.on('update_room', newroom => {
@@ -66,13 +66,13 @@ $(function(){
   });
 });
 
-function Ready () {
+function ready () {
   socket.emit('ready');
 };
 
-function Roll () {
+function roll () {
   socket.emit('roll');
-  document.getElementById('roll').style.visibility = 'hidden'; //Wird wieder sichtbar durch sowas wie socket.on('yourTurn')
+  //document.getElementById('roll').style.visibility = 'hidden'; //Wird wieder sichtbar durch sowas wie socket.on('yourTurn')
 };
 
 function doOnlineL () {

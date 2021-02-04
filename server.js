@@ -289,7 +289,18 @@ console.log('-------------------------------------------------------------------
   socket.on('roll', () => {
     if (checkRoom(room)===1){
             //eval("rooms.room"+room+".hadTurn = rooms.room"+room+".hadTurn + 1");
-            eval("if (rooms.room"+room+".player.id"+id+".hasTurn == 1){wuerfel = getRandomInt(6)+1;console.log('Gewürfelt: '+wuerfel);rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel;rooms.room"+room+".hadTurn = rooms.room"+room+".hadTurn + 1;noTurn(room);nextPlayer(room);updateRoom(room)}");
+            //eval("if (rooms.room"+room+".player.id"+id+".hasTurn == 1){wuerfel = getRandomInt(6)+1;console.log('Gewürfelt: '+wuerfel);rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel;rooms.room"+room+".hadTurn = rooms.room"+room+".hadTurn + 1;noTurn(room);nextPlayer(room);updateRoom(room)}");
+            wuerfel = getRandomInt(6)+1
+
+            eval("if (rooms.room"+room+".player.id"+id+".hasTurn == 1){execRoll()}");
+
+            function execRoll() {
+              console.log('Gewürfelt: '+wuerfel);
+              eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' hat eine '+wuerfel+' gewürfelt')");
+              eval("rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel");
+              eval("rooms.room"+room+".hadTurn = rooms.room"+room+".hadTurn + 1;");
+              nomoreTurn(room);nextPlayer(room);updateRoom(room)
+            }
 
             /*eval("localhadTurn = rooms.room"+room+".hadTurn");
             eval("IDnextP = playerIDbyindex(rooms.room"+room+".player, rooms.room"+room+".players[localhadTurn])");
@@ -300,7 +311,7 @@ console.log('-------------------------------------------------------------------
 
 });
 
-function noTurn(room){
+function nomoreTurn(room){
   //console.log("Versuche Zurückzusetzen");
   eval("localhadTurn = rooms.room"+room+".hadTurn - 1");
   //console.log("localhadTurn: "+ localhadTurn)
