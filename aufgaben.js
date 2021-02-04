@@ -25,8 +25,9 @@ function getExcercise(categoryID, excerciseID){
     break;
     default:
     //console.log(i+" war es nicht");
-    }
+  }
  }
+
   /*switch (categoryID){
       case 1:
         //console.log('Kategorie 1');
@@ -62,7 +63,7 @@ var excercises = {
   K1: [
     'Aufgabe 1 von Kategorie 1', //Index = [0]
     'Aufgabe 2 dieser Kategorie',
-    'Leck mich doch dis is Numma Droi',
+    'Leck mich doch, dis is Numma Droi',
     'Fuck leck mich'
   ],
   K2: [
@@ -82,17 +83,21 @@ var excercises = {
 
 //console.log("Frage: "+getExcercise(getExcercise(),1));
 
-/*console.log("Erstelle feld1");
+/*
+console.log("Erstelle feld1");
 var feld1 = {};
 console.log("Hole Kategorie")
 feld1.Kategorie = getExcercise();
+
 console.log("Hole FrageID")
 feld1.frageid = getExcercise(feld1.Kategorie);
+
 console.log("Hole Fragen als string")
 feld1.frage =getExcercise(feld1.Kategorie,feld1.frageid);
 
-console.log(util.inspect(feld1))*/
+console.log(util.inspect(feld1))
 
+*/
 //console.log(getExcercise());
 
 module.exports = getExcercise;

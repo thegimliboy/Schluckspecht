@@ -49,6 +49,10 @@ $(function(){
     $('#nachrichten').append($('<li>').text(msg));
   });
 
+  socket.on('yourTurn', function(){
+    document.getElementById('roll').style.visibility = 'visible';
+  });
+
   socket.on('gamestart', () =>{
     console.log("Game started");
     document.getElementById('setReady').style.visibility = 'hidden';
