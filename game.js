@@ -1,4 +1,6 @@
 //var players = [];
+//roll-button taucht erst auf wenn das gema ready ist
+//Bereit button verschwindet wenn das Spiel gestartet ist
 var room = {};
 $(function(){
   var username = getParameterByName('username');
@@ -24,10 +26,10 @@ $(function(){
     });
   }
 
-  socket.on('your_room_is', (room) => {
-      gamecode = room;
-      console.log('new room: '+room);
-      document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+room+' \t | Username: '+username;
+  socket.on('your_room_is', (gameroom) => {
+      gamecode = gameroom;
+      console.log('new room: '+gameroom);
+      document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+gameroom+' \t | Username: '+username;
   });
 
   socket.on('update_room', newroom => {
@@ -47,9 +49,13 @@ $(function(){
     $('#nachrichten').append($('<li>').text(msg));
   });
 
+  socket.on('yourTurn', function(){
+    document.getElementById('roll').style.visibility = 'visible';
+  });
+
   socket.on('gamestart', () =>{
     console.log("Game started");
-
+    document.getElementById('setReady').style.visibility = 'hidden';
     for (var i=1;i<26;i++){
       if (i < 10) {eval("feld = document.getElementById('canvas0"+i+"')");} else {eval("feld = document.getElementById('canvas"+i+"')");};
       //feld = document.getElementById('canvas01')
@@ -60,8 +66,13 @@ $(function(){
   });
 });
 
-function Ready () {
+function ready () {
   socket.emit('ready');
+};
+
+function roll () {
+  socket.emit('roll');
+  //document.getElementById('roll').style.visibility = 'hidden'; //Wird wieder sichtbar durch sowas wie socket.on('yourTurn')
 };
 
 function doOnlineL () {

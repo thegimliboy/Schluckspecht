@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>SocketChat</title>
+    <title>Schluckspecht</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
@@ -15,7 +15,7 @@
   </head>
   <body>
     <header class='headline'>
-      <h1>
+      <h1 id='headline1'>
           Schluckspecht: Der Titel
       </h1>
     </header>
@@ -24,8 +24,9 @@
       <div class='leftheadline'>
         <h2 id="spieltitel"> Schluckspecht: Das Spiel </h2>
       </div>
-      <button type="button" id="setReady" onclick="Ready();"> Bereit </button>
-      <canvas width=350 height=725 id="Buttons"></canvas>
+      <button type="button" id="setReady" onclick="ready();"> Bereit </button>
+      <button type="button" id="roll" onclick="roll();"> W&uuml;rfeln </button>
+      <!-- <canvas width=350 height=725 id="Buttons"></canvas> -->
         <table>
         	 <tr>
         		<td><canvas width=220 height=145 id="canvas01" style="background-image: url('feld.png')"></canvas></td>
