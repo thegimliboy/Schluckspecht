@@ -1,5 +1,5 @@
 //var players = [];
-//roll-button taucht erst auf wenn das gema ready ist
+//roll-button taucht erst auf wenn das game ready ist
 //Bereit button verschwindet wenn das Spiel gestartet ist
 var room = {};
 $(function(){
