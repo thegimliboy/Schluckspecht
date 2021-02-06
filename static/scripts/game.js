@@ -1,6 +1,3 @@
-//var players = [];
-//roll-button taucht erst auf wenn das gema ready ist
-//Bereit button verschwindet wenn das Spiel gestartet ist
 var room = {};
 $(function(){
   var username = getParameterByName('username');
@@ -30,6 +27,7 @@ $(function(){
       gamecode = gameroom;
       console.log('new room: '+gameroom);
       document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+gameroom+' \t | Username: '+username;
+      document.getElementById('setReady').style.visibility = 'visible';
   });
 
   socket.on('update_room', newroom => {
@@ -55,8 +53,9 @@ $(function(){
     if (currTurn == 'Jetzt ist '+ username +' an der Reihe') {currTurn = 'Du bist dran'; document.getElementById('roll').style.visibility = 'visible';}
     //console.log(currTurn);
     $('#spielstand').append($('<li>').text(rresult));
-    $('#spielstand').append($('<li>').text(currTurn));
+    //$('#spielstand').append($('<li>').text(currTurn));
     if (room.currQuestion == 'Not yet assigned') {} else {$('#spielstand').append($('<li>').text('Aufgabe: '+room.currQuestion))};
+    $('#spielstand').append($('<li>').text(currTurn));
   });
 
 
@@ -95,6 +94,12 @@ function getParameterByName (name, url = window.location.href) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
+};
+
+window.onbeforeunload = function(){
+  if (room.running == 1){
+    return 'Aber bist du sicher, dass du das Spiel verlassen willst?';
+  }
 };
 
 var canvas1 = document.getElementById("Buttons");
