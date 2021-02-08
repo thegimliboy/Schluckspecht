@@ -1,0 +1,74 @@
+body {
+  background:lightblue;
+  text-align: center;
+}
+#website {
+  width:900px;
+  margin: 0 auto;
+}
+#header {
+  width: 900px;
+  height:150px;
+  background: grey;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+}
+#header h1 {
+padding-top: 45px;
+font-size: 3em;
+font-family: sans-serif;
+color: white;
+text-shadow: 0 0 5px black;
+}
+#main {
+  width:900px;
+}
+#menu {
+  float: left;
+  width: 700px;
+  height: 350px;
+  background:blue;
+  border-radius: 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+}
+#chat {
+float: right;
+width: 200px;
+height: 350px;
+background:darkred;
+border-radius: 10px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+-o-border-radius: 5px;
+-ms-border-radius: 5px;
+}
+#footer {
+width:450px;
+height: 200px;
+background: orange;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+-o-border-radius: 5px;
+-ms-border-radius: 5px;
+float: left;
+
+}
+#online {
+width:450px;
+height:200px;
+background:black;
+border-radius:1px;
+clear:both;
+float: right;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+-o-border-radius: 5px;
+-ms-border-radius: 5px;
+}
