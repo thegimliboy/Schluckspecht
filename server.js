@@ -2,15 +2,18 @@
 //Todo: Gameroom Admin, welcher this.players[1] ist.
 //Todo: Kick User
 //Todo: Keine Doppelten Usernames IN EINEM RAUM
-//Todo: Grafik machen für join und game
 //Todo: Gamcode <10000  &  >100000
 //FELDER OBJECT, darin einzelne Feld objecte: Canvasid, Feldnummer, Kategorie, Frage wird jedes mal auf Server zufällig ausgewählt
-//Server.js sucht zufällige Kategorie und Frage aus, die der Client aus Aufgaben.js abfragt.
-//Spieler am zug steht in players object, client kennt eigene ID
-//Anzeigen, wer aktuell am Zug ist
 //Regel, Liste mit Regel, Regeln begrenz auf Runden (neue function "nextround()"), window.promt wenn regel abgelaufen
-//Room braucht room.fields.field.currentexercise{kategorieid, fragenid}
-//Was wenn ein Spieler erst später reinjoined?
+//Was wenn ein Spieler erst später reinjoined? Was wenn ein Spieler während des Spieles verlässt?
+//SSL Verschlüsselung
+//Warnung wenn man game.js während spiel schließt
+//Schluckspecht Logo anklickbar machen
+//Schluckspecht Logo in join.html
+//Wenn alle den Raum verlassen haben, dann lösch ihn
+//Nach würfeln "gemacht"-Knopf, damit der nächste Würfeln kann
+//Dynamische Feldgröße. Host kann Feldmaße selbst bestimmen durch parameter, die dann mit for-Schleifen die Canvastabellen erstellen
+//In Aufgaben.js Index[0]=Kategoriename, getRandomInt+1
 
 var express = require('express');
 var app = express();
@@ -24,11 +27,12 @@ server.listen(3001, function() {
   console.log('Started 3001');
 });
 
-app.use(express.static(__dirname + '/'));
+app.use(express.static(__dirname + '/static'));
 
 //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/math.random
 function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
 
+//https://stackoverflow.com/questions/45796948/search-a-deeply-nested-value-in-array-of-objects-in-javascript
 function playerIDbyindex (obj, query) {
     for (var currProp in obj) {
         var value = obj[currProp].pname;
@@ -67,13 +71,14 @@ function Room (rname) {
     eval("this.fields.canvas"+feldnr+" = new Field (feldnr)");
   },this;
   this.hadTurn = 0;
+  this.currQuestion = 'Not yet assigned';
 };
 
 function Player (socketid, nickname) {
 	this.sid=socketid;
 	this.pname=nickname;
   this.gamestate=0;
-  this.getrunken=0;
+  //this.getrunken=0;
   this.isAdmin=0;
   this.ready=0;
   this.hasTurn=0;
@@ -85,6 +90,7 @@ function Field (feldnr) {
   //this.categoryname='';
 };
 
+
 function updateRoom (room){
   eval("io.to(room).emit('update_room', rooms.room"+room+")");
 }
@@ -95,7 +101,8 @@ function checkReady (room) {
     var divider = 0;
     if (eval("rooms.room"+room+".running") === 0) {
       eval("for (const property in rooms.room"+room+".player) {eval('value = rooms.room'+room+'.player.'+property+'.ready');count = count + value;divider++;};")
-      eval("if (count===divider)  {rooms.room"+room+".ready = 1; console.log('"+room+" is ready')} else {rooms.room"+room+".ready = 0; console.log('"+room+" is not ready')}");
+      //eval("if (count===divider)  {rooms.room"+room+".ready = 1; console.log('"+room+" is ready')} else {rooms.room"+room+".ready = 0; console.log('"+room+" is not ready')}");
+      eval("if (count===divider)  {rooms.room"+room+".ready = 1;} else {rooms.room"+room+".ready = 0;}");
       eval("if (rooms.room"+room+".ready === 1) {startGame(room);}");
       //Unteren beiden zeilen kombinieren
     }
@@ -113,15 +120,19 @@ function startGame(room) {
       io.to(room).emit('gamestart');
       eval("console.log('Started game in room "+room+"')");
       eval("rooms.room"+room+".running = 1");
+      eval("io.to(room).emit('nachricht', 'Spielbeginn!')");
+      eval("io.to(room).emit('gamestate', 'Spielbeginn', 'Jetzt ist '+ rooms.room"+room+".players[0] +' an der Reihe')");
 
       for (var i=1;i<26;i++){
-        if (i < 10) {eval("rooms.room"+room+".addField("+i+")")} else {eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");};
+        //if (i < 10) {eval("rooms.room"+room+".addField("+i+")")} else {eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");};
+        eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");
       }
 
       eval("io.to(room).emit('update_room', rooms.room"+room+")");
       nextRound(room);
     }
     else {eval("console.log('"+room+" is already running')")}
+    //Logik um das Spiel wieder zurrück zu setzen!!
   }
 
 };
@@ -129,25 +140,26 @@ function startGame(room) {
 function nextRound(room) {
   if (checkRoom(room)===1){
     //noTurn(room);
-    console.log('Nächste Runde ist gestartet');
+    //console.log('Nächste Runde ist gestartet');
+
+
     eval("rooms.room"+room+".hadTurn = 0");
-    eval("rooms.room"+room+".round = rooms.room"+room+".round + 1; console.log('Runde++')");
+    eval("rooms.room"+room+".round = rooms.room"+room+".round + 1;");
+    eval("io.to(room).emit('nachricht', 'Runde '+rooms.room"+room+".round)");
     nextPlayer(room);
     //updateRoom(room);
   }
 };
 
 function nextPlayer(room) {
-  //Nächster Spieler bekommt hasTurn=1, bis players.length = hadTurn ist.
-  console.log('hadTurn='+ eval("rooms.room"+room+".hadTurn") + '; players.length: '+ eval("rooms.room"+room+".players.length"));
+
   eval("if (rooms.room"+room+".hadTurn == rooms.room"+room+".players.length) {console.log('next Round'); nextRound(room);} else { console.log('next Player');localhadTurn = rooms.room"+room+".hadTurn;}");
   eval("IDnextP = playerIDbyindex(rooms.room"+room+".player, rooms.room"+room+".players[localhadTurn])");
   eval("rooms.room"+room+".player."+IDnextP+".hasTurn = 1");
 
-  //Hier muss der nächster Spieler in der Reihenfolge hasTurn zugewiesen bekommen
-  //  eval("rooms.room"+room+".round = rooms.room"+room+".hadTurn = rooms.room"+room+".round = rooms.room"+room+".hadTurn + 1");
-  updateRoom(room);
-  //nextPlayer(room)
+
+  eval("if (rooms.room"+room+".round !== 1 && rooms.room"+room+".hadTurn !== 0) {updateRoom(room)}");
+
 }
 
 function checkRoom (gc) {
@@ -162,6 +174,7 @@ function msg_to_room (room, topic, msg) {
 };
 
 var rooms = {};
+rooms.roomWurm = new Room('Wurm');
 
 io.on('connection', (socket) => {
 
@@ -227,13 +240,13 @@ console.log('-------------------------------------------------------------------
     }
   });
 
-  socket.on('checkuser', (cu) =>  {
+  /*socket.on('checkuser', (cu) =>  {
     var cu_exists;
     if (cu_exists === undefined ) {socket.emit('cu_isavailable', '0');}
     else {
       socket.emit('cu_isavailable', '1');
     }
-  });
+  });*/
 
 
   socket.on('newroom',() => {
@@ -277,10 +290,12 @@ console.log('-------------------------------------------------------------------
       if (eval("rooms.room"+room+".player.id"+id+".ready") === 0) {
         //console.log("From 0 to 1");
         eval("rooms.room"+room+".player.id"+id+".ready = 1");
+        eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' ist bereit')");
       }
       else {
         //console.log("From 1 to 0");
         eval("rooms.room"+room+".player.id"+id+".ready = 0");
+        eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' ist doch nicht bereit')");
       }
       checkReady(room);
     }
@@ -296,10 +311,39 @@ console.log('-------------------------------------------------------------------
 
             function execRoll() {
               console.log('Gewürfelt: '+wuerfel);
-              eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' hat eine '+wuerfel+' gewürfelt')");
-              eval("rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel");
-              eval("rooms.room"+room+".hadTurn = rooms.room"+room+".hadTurn + 1;");
-              nomoreTurn(room);nextPlayer(room);updateRoom(room)
+              //eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' hat eine '+wuerfel+' gewürfelt')");
+
+              /*
+              eval("nextGS = rooms.room"+room+".player.id"+id+".gamestate + wuerfel");
+              console.log('nextGS: '+nextGS);
+              eval("nextGSif = 25 + (25 -(rooms.room"+room+".player.id"+id+".gamestate+wuerfel))");
+              eval("nextGSifnew = (25 -(rooms.room"+room+".player.id"+id+".gamestate+wuerfel))");
+              console.log('nextGSif: '+nextGSif);
+              console.log('nextGSifnew: '+nextGSifnew);
+              */
+
+              //eval("if (nextGS > 25) {rooms.room"+room+".player.id"+id+".gamestate=25+(25-(rooms.room"+room+".player.id"+id+".gamestate+wuerfel))};console.log('gs>25');finishMove();");
+
+              eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel > 25) {console.log('gs>25'); rooms.room"+room+".player.id"+id+".gamestate= rooms.room"+room+".player.id"+id+".gamestate + (25 -(rooms.room"+room+".player.id"+id+".gamestate+wuerfel)); finishMove();}");
+              eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel < 25) {console.log('gs<25'); rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel;finishMove();}");
+
+              eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel == 25) {console.log('gs==25');io.to(room).emit('gamestate', rooms.room"+room+".player.id"+id+".pname+' hat gerade eine '+wuerfel+' gewürfelt', rooms.room"+room+".players[rooms.room"+room+".hadTurn] +' hat gewonnen');rooms.room"+room+".currQuestion='Not yet assigned';startGame(room);}");
+
+//if = 25; startGame, meldung spieler hat gewonnen
+              //eval("rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel");
+              function finishMove() {
+                eval("rooms.room"+room+".hadTurn = rooms.room"+room+".hadTurn + 1;");
+                eval("localhadTurn = rooms.room"+room+".hadTurn");
+                eval("if (localhadTurn >= rooms.room"+room+".players.length) {localhadTurn = 0}");
+                //console.log(util.inspect(rooms.roomWurm.player));
+                eval("rooms.room"+room+".currQuestion = getExcercise(rooms.room"+room+".fields.canvas"+eval('rooms.room'+room+'.player.id'+id+'.gamestate')+".category)");
+                //eval(console.log("rooms.room"+room+".currQuestion = getExcercise(rooms.room"+room+".fields.canvas"+eval('rooms.room'+room+'.player.id'+id+'.gamestate')+".category)"));
+                eval("rooms.room"+room+".currQuestion = getExcercise(rooms.room"+room+".fields.canvas"+eval('rooms.room'+room+'.player.id'+id+'.gamestate')+".category, rooms.room"+room+".currQuestion)");
+                nomoreTurn(room);nextPlayer(room);updateRoom(room)
+                eval("io.to(room).emit('gamestate', rooms.room"+room+".player.id"+id+".pname+' hat gerade eine '+wuerfel+' gewürfelt', 'Jetzt ist '+ rooms.room"+room+".players[localhadTurn] +' an der Reihe')");
+              }
+              //eval("console.log('Aktuelle Frage: '+rooms.room"+room+".currQuestion)");
+
             }
 
             /*eval("localhadTurn = rooms.room"+room+".hadTurn");

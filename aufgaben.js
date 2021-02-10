@@ -21,7 +21,7 @@ function getExcercise(categoryID, excerciseID){
      case i:
       //eval("console.log('Kategorie "+i+"')");
       checkEx(excerciseID);
-      return checkEx(excerciseID) || eval("(getRandomInt(excercises.K"+i+".length))");
+      return checkEx(excerciseID) || eval("(getRandomInt(excercises.K"+i+".length+1))");
     break;
     default:
     //console.log(i+" war es nicht");
@@ -107,13 +107,32 @@ var excercises = {
     'Du musst entscheiden: Wer würde am ehesten für immer auf Internet verzichten? Der Steinzeitmensch verteilt 3 Schlücke.',
     'Du musst entscheiden: Welcher Spieler würde eher ein Stalker werden? Nehmt euch in Acht und lasst denjenigen 3 Schlücke trinken.',
     'Du musst entscheiden: Welcher Spieler würde am ehesten eine Dating App nutzen? Der Tinderboy trinkt 4 Schlücke.',
+    'Verteile für jeden Buchstaben in deinem Namen einen Schluck.'
 
 
   ],
   K3: [  //Spiel
-    'Entweder nie mehr Zeit oder nie mehr Geld haben? Stimmt in der Gruppe ab. Die Verlierer trinken 4 Schlücke',
     'Reime auf "Bier". Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
-    'Reime auf '
+    'Reime auf "Flasche". Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
+    'Entweder McDonalds oder Burger King. Stimmt in der Gruppe ab. Die Verlierer trinken 3 Schlücke.',
+    'Lieber reich und unglücklich oder arm und glücklich sein? Stimmt in der Gruppe ab. Die Verlierer trinken 4 Schlücke.',
+    'Lieber alles sagen, was man denkt oder nie wieder etwas sagen können? Stimmt in der Gruppe ab. Die Verlierer trinken 2 Schlücke.',
+    'Lieber nie wieder Pizza essen oder nie weder Döner essen? Stimmt in der Gruppe ab. Die Verlierer trinken 5 Schlücke.',
+    'Lieber so lange Arme wie Beine haben oder so lange beine wie Arme? Stimmt in der Gruppe ab. Die Verlierer trinken 4 Schlücke.',
+    'Lieber fliegen können oder unsichtbar sein? Stimmt in der Gruppe ab. Die Verlierer trinken 2 Schlücke.',
+    'Themenspiel: Dinge, die man oft verliert. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
+    'Themenspiel: Dinge,die man gewinenn kann. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 4 Schlücke trinken.',
+    'Themenspiel: Supermärkte in der Nähe. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 5 Schlücke trinken.',
+    'Themenspiel: Bekannte Automarken. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 4 Schlücke trinken.',
+    'Themenspiel: Bekannte Schuhmarken. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
+    'Themenspiel: Berühmte Schauspieler. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
+
+
+  ],
+  K4: [  //Wahrheit
+    'Welchen Spieler findest du am attraktivsten? Die Beautyqueen verteilt 3 Schlücke.',
+    'Bist du schonmal fremdgegangen? Beantworte die Frage oder trinke 5 Schlücke.',
+    'Hast du schonmal einen Strafzettel bekommen? Beantworte die Frage oder trinke 3 Schlücke.'
   ]
 };
 
