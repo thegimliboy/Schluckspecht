@@ -12,6 +12,8 @@
 //Schluckspecht Logo in join.html
 //Wenn alle den Raum verlassen haben, dann lösch ihn
 //Nach würfeln "gemacht"-Knopf, damit der nächste Würfeln kann
+//Dynamische Feldgröße. Host kann Feldmaße selbst bestimmen durch parameter, die dann mit for-Schleifen die Canvastabellen erstellen
+//In Aufgaben.js Index[0]=Kategoriename, getRandomInt+1
 
 var express = require('express');
 var app = express();
@@ -122,7 +124,8 @@ function startGame(room) {
       eval("io.to(room).emit('gamestate', 'Spielbeginn', 'Jetzt ist '+ rooms.room"+room+".players[0] +' an der Reihe')");
 
       for (var i=1;i<26;i++){
-        if (i < 10) {eval("rooms.room"+room+".addField("+i+")")} else {eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");};
+        //if (i < 10) {eval("rooms.room"+room+".addField("+i+")")} else {eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");};
+        eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");
       }
 
       eval("io.to(room).emit('update_room', rooms.room"+room+")");
@@ -155,7 +158,7 @@ function nextPlayer(room) {
   eval("rooms.room"+room+".player."+IDnextP+".hasTurn = 1");
 
 
-  updateRoom(room);
+  eval("if (rooms.room"+room+".round !== 1 && rooms.room"+room+".hadTurn !== 0) {updateRoom(room)}");
 
 }
 

@@ -21,7 +21,7 @@ function getExcercise(categoryID, excerciseID){
      case i:
       //eval("console.log('Kategorie "+i+"')");
       checkEx(excerciseID);
-      return checkEx(excerciseID) || eval("(getRandomInt(excercises.K"+i+".length))");
+      return checkEx(excerciseID) || eval("(getRandomInt(excercises.K"+i+".length+1))");
     break;
     default:
     //console.log(i+" war es nicht");
@@ -61,7 +61,8 @@ function getExcercise(categoryID, excerciseID){
 
 var excercises = {
   K1: [  //Saufen
-    'Alle mit weißen Socken trinken.', //Index = [0]
+    'Saufen', //Index = [0]
+    'Alle mit weißen Socken trinken.',
     'Du und Person deiner Wahl trinkt.',
     'Alle mit einem Handy von Samsung trinken.',
     'Alle Jungs trinken.',
@@ -96,6 +97,7 @@ var excercises = {
 
   ],
   K2: [  //Aufgabe
+    'Aufgabe',
     'Nenne die Nachnamen aller Spieler.',
     'Sage das Alphabet rückwärts auf. Wenn du einen Fehler machst, musst du dein Glas exen',
     'Zähle asiatische Hauptstädte auf. Du kannst aufhören, wann du willst, verlierst jedoch beim ersten Fehler und trinkst dann 3 Schlücke.',
@@ -111,6 +113,7 @@ var excercises = {
 
   ],
   K3: [  //Spiel
+    'Spiel',
     'Entweder nie mehr Zeit oder nie mehr Geld haben? Stimmt in der Gruppe ab. Die Verlierer trinken 4 Schlücke',
     'Reime auf "Bier". Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
     //'Reime auf '
