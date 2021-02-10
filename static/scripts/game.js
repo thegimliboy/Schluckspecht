@@ -13,7 +13,8 @@ var aufgabeIMG = new Image();
 aufgabeIMG.src = "gfx/Aufgabe.png";
 var spielIMG = new Image();
 spielIMG.src = "gfx/Spiel.png";
-
+var wahrheitIMG = new Image();
+wahrheitIMG.src = "gfx/Wahrheit.png";
 
 $(function(){
   var username = getParameterByName('username');
@@ -120,6 +121,7 @@ function doCanvasU(){
     switch(eval("room.fields.canvas"+i+".category")) {
       case 1:
         addToCanvas(i, saufenIMG)
+        //Welche Spieler sind auf Canvas i?
         console.log(i+" is 1");
         break;
 
@@ -131,6 +133,10 @@ function doCanvasU(){
       case 3:
         addToCanvas(i, spielIMG)
         console.log(i+" is 3");
+        break;
+      case 4:
+        addToCanvas(i, wahrheitIMG)
+        console.log(i+" is 4");
         break;
 
       default:
