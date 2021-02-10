@@ -99,7 +99,7 @@ function ready () {
 
 function roll () {
   socket.emit('roll');
-  document.getElementById('roll').style.visibility = 'hidden'; //Wird wieder sichtbar durch sowas wie socket.on('yourTurn')
+  document.getElementById('roll').style.visibility = 'hidden';
 };
 
 function doOnlineL () {
