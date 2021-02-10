@@ -46,7 +46,7 @@ body {
     width: 600px;
     height: 350px;
     background:darkred;
-    border-radius: 5px;
+    border-radius: 0px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     -o-border-radius: 5px;
