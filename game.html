@@ -24,9 +24,7 @@
       <div class='leftheadline'>
         <h2 id="spieltitel"> Schluckspecht: Das Spiel </h2>
       </div>
-      <button type="button" id="setReady" onclick="Ready();"> Bereit </button>
-      <button type="button" id="roll" onclick="Roll();"> W&uuml;rfeln </button>
-      <canvas width=350 height=725 id="Buttons"></canvas>
+
         <table>
         	 <tr>
         		<td><canvas width=220 height=145 id="canvas01" style="background-image: url('feld.png')"></canvas></td>
@@ -68,12 +66,29 @@
 
     <section class="right">
       <div class="oben">
-        <p> Chat </p>
-        <ul id="nachrichten"></ul>
-        <form action="">
-          <input id="cn" autocomplete="off" />
-          <button>Send</button>
-        </form>
+        <div id="website">
+          <div id="header">
+            <h1>Schluckspecht</h1>
+          </div>
+          <div id="main">
+            <div id="menu">
+            </div>
+            <div id="chat">
+              <button type="button1" id="setReady" onclick="Ready();"> Bereit </button>
+              <button type="button2" id="roll" onclick="Roll();"> W&uuml;rfeln </button>
+            </div>
+            <div id="online">
+            </div>
+            <div id="footer">
+              <p> Chat </p>
+              <ul id="nachrichten"></ul>
+              <form action="">
+                <input id="cn" autocomplete="off" />
+                <button>Send</button>
+              </form>
+            </div>
+          </div>
+          </div>
       </div>
       <div class="unten">
         <p id="OLcount"> Aktuell Online: </p>

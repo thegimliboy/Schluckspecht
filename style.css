@@ -2,44 +2,81 @@ body {
     font-family: arial;
     display: block;
     height: 100%;
-}
+      background:lightblue;
+      text-align: center;
+    }
+    #website {
+      width:1480px;
 
-.center {
-  margin: auto;
-  width 50%;
-  padding 10px
+    }
+    #header {
+      width: 1900px;
+      height:150px;
+      background: grey;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -o-border-radius: 5px;
+      -ms-border-radius: 5px;
+      margin: o auto;
+    }
+    #header h1 {
+    padding-top: 45px;
+    font-size: 3em;
+    font-family: sans-serif;
+    color: white;
+    text-shadow: 0 0 5px black;
+    }
+    #main {
+      width:1280px;
+    }
+    #menu {
+      float: left;
+      width: 1000px;
+      height: 350px;
+      background:blue;
+      border-radius: 10px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -o-border-radius: 5px;
+      -ms-border-radius: 5px;
+    }
+    #chat {
+    float: right;
+    width: 600px;
+    height: 350px;
+    background:darkred;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+.button {
+  float: right;
 }
-h1{
-  text-align: center;
-  background-color: #ffce80;
-}
-
-.left {
-  background-color: #ff9e2c;
-  float: left;
-  width: 80%;
-}
-
-.right {
-    background-color: #b6701e;
+    }
+    #footer {
+    width:450px;
+    height: 200px;
+    background: orange;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
     float: left;
-    width: 20%;
-}
 
-#logo {
-  display: table-cell;
-  width: 100%;
-}
+    }
+    #online {
+    width:450px;
+    height:200px;
+    background:black;
+    border-radius:1px;
+    clear:both;
+    float: right;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
 
-#logo img {
-  width: 30%;
-  height: auto;
-  float: left;
-}
-
-
-table {
-  border-spacing:0;
-  border-collapse: collapse;
-}
 }
