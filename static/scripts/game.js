@@ -15,6 +15,16 @@ var spielIMG = new Image();
 spielIMG.src = "gfx/Spiel.png";
 var wahrheitIMG = new Image();
 wahrheitIMG.src = "gfx/Wahrheit.png";
+var regelIMG = new Image();
+regelIMG.src = "gfx/Regel.png";
+var strafeIMG = new Image();
+strafeIMG.src = "gfx/Strafe.png";
+
+for (var i=1; i<9;i++){
+  eval("var p"+i+" = new Image();")
+  eval("p"+i+".src = 'gfx/p"+i+".png'");
+}
+
 
 $(function(){
   var username = getParameterByName('username');
@@ -122,28 +132,52 @@ function doCanvasU(){
       case 1:
         addToCanvas(i, saufenIMG)
         //Welche Spieler sind auf Canvas i?
-        console.log(i+" is 1");
+        //console.log(i+" is 1");
         break;
-
       case 2:
         addToCanvas(i, aufgabeIMG)
-        console.log(i+" is 2");
+        //console.log(i+" is 2");
         break;
-
       case 3:
         addToCanvas(i, spielIMG)
-        console.log(i+" is 3");
+        //console.log(i+" is 3");
         break;
       case 4:
         addToCanvas(i, wahrheitIMG)
-        console.log(i+" is 4");
+        //console.log(i+" is 4");
+        break;
+      case 5:
+        addToCanvas(i, regelIMG)
+        //console.log(i+" is 5");
+        break;
+      case 6:
+        addToCanvas(i, strafeIMG)
+        //console.log(i+" is 6");
         break;
 
       default:
         console.log("Irgendwas lief schief. Kein Bild für Kategorie definiert?")
+        break;
     }
+    //Zeichne Player; i=Canvas
+    for (var pX in room.player) {
+      eval("pX = room.player."+pX);
+      //console.log("pX.pname: "+pX.pname+"; pX.gamestate: "+pX.gamestate+"; i: "+i)
+      if (pX.gamestate == i) {
+        for (var j = 0; j<room.players.length; j++){
+          if (room.players[j] == pX.pname) {
+            j = j+1
+            eval("addToCanvas(i, p"+j+")");
+            console.log("Added to "+i+"; p"+j)
+          }
+        }
+      }
+    }
+
   }
 }
+
+
 
 window.onbeforeunload = function(){
   if (room.running == 1){

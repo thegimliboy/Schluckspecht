@@ -6,14 +6,14 @@
 //FELDER OBJECT, darin einzelne Feld objecte: Canvasid, Feldnummer, Kategorie, Frage wird jedes mal auf Server zufällig ausgewählt
 //Regel, Liste mit Regel, Regeln begrenz auf Runden (neue function "nextround()"), window.promt wenn regel abgelaufen
 //Was wenn ein Spieler erst später reinjoined? Was wenn ein Spieler während des Spieles verlässt?
-//SSL Verschlüsselung
 //Warnung wenn man game.js während spiel schließt
 //Schluckspecht Logo anklickbar machen
 //Schluckspecht Logo in join.html
 //Wenn alle den Raum verlassen haben, dann lösch ihn
 //Nach würfeln "gemacht"-Knopf, damit der nächste Würfeln kann
 //Dynamische Feldgröße. Host kann Feldmaße selbst bestimmen durch parameter, die dann mit for-Schleifen die Canvastabellen erstellen
-//In Aufgaben.js Index[0]=Kategoriename, getRandomInt+1
+//Frountend Englischer Text -> Deutscher Text
+//
 
 var express = require('express');
 var app = express();
@@ -327,7 +327,7 @@ console.log('-------------------------------------------------------------------
               eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel > 25) {console.log('gs>25'); rooms.room"+room+".player.id"+id+".gamestate= rooms.room"+room+".player.id"+id+".gamestate + (25 -(rooms.room"+room+".player.id"+id+".gamestate+wuerfel)); finishMove();}");
               eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel < 25) {console.log('gs<25'); rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel;finishMove();}");
 
-              eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel == 25) {console.log('gs==25');io.to(room).emit('gamestate', rooms.room"+room+".player.id"+id+".pname+' hat gerade eine '+wuerfel+' gewürfelt', rooms.room"+room+".players[rooms.room"+room+".hadTurn] +' hat gewonnen');rooms.room"+room+".currQuestion='Not yet assigned';startGame(room);}");
+              eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel == 25) {rooms.room"+room+".player.id"+id+".gamestate = 25; console.log('gs==25');io.to(room).emit('gamestate', rooms.room"+room+".player.id"+id+".pname+' hat gerade eine '+wuerfel+' gewürfelt', rooms.room"+room+".players[rooms.room"+room+".hadTurn] +' hat gewonnen');rooms.room"+room+".currQuestion='Not yet assigned';updateRoom(room);startGame(room);}");
 
 //if = 25; startGame, meldung spieler hat gewonnen
               //eval("rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel");
