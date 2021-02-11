@@ -25,6 +25,19 @@ for (var i=1; i<9;i++){
   eval("p"+i+".src = 'gfx/p"+i+".png'");
 }
 
+var border_cblIMG = new Image();
+border_cblIMG.src = "gfx/border_cbl.png";
+var border_cbrIMG = new Image();
+border_cbrIMG.src = "gfx/border_cbr.png";
+var border_ctlIMG = new Image();
+border_ctlIMG.src = "gfx/border_ctl.png";
+var border_ctrIMG = new Image();
+border_ctrIMG.src = "gfx/border_ctr.png";
+var border_lrIMG = new Image();
+border_lrIMG.src = "gfx/border_lr.png";
+var border_udIMG = new Image();
+border_udIMG.src = "gfx/border_ud.png";
+
 
 $(function(){
   var username = getParameterByName('username');
@@ -174,6 +187,44 @@ function doCanvasU(){
       }
     }
 
+    switch(i) {
+      case 16:
+      case 24:
+        eval("addToCanvas(i, border_cblIMG)")
+        break;
+      case 5:
+      case 19:
+        eval("addToCanvas(i, border_cbrIMG)")
+        break;
+      case 13:
+      case 23:
+        eval("addToCanvas(i, border_ctlIMG)")
+        break;
+      case 9:
+      case 21:
+        eval("addToCanvas(i, border_ctrIMG)")
+        break;
+      case 6:
+      case 7:
+      case 8:
+      case 14:
+      case 15:
+      case 20:
+        eval("addToCanvas(i, border_lrIMG)")
+        break;
+      case 2:
+      case 3:
+      case 4:
+      case 10:
+      case 11:
+      case 12:
+      case 17:
+      case 18:
+      case 22:
+        eval("addToCanvas(i, border_udIMG)")
+        break;
+
+    }
   }
 }
 
