@@ -67,7 +67,7 @@ var excercises = {
     'Alle Jungs trinken.',
     'Alle, die vor dir sind, trinken.',
     'Alle trinken.',
-    'Alle hinter dir trinken.',
+    'Alle, die hinter dir sind trinken.',
     'Du trinkst.',
     'Alle Mädchen trinken.',
     'Trinke 3 Schlücke.',
@@ -93,10 +93,16 @@ var excercises = {
     'Der Jüngste trinkt',
     'Alle mit schwarzen Socken trinken',
     'Verteile 6 Schlücke',
+    'Endlich kannst du trinken :)',
+    'Trinke, wenn du in einem Fitnessstudio angemeldet bist.',
+    'Trinke, wenn du einen Fake-Account auf Instagram hast.',
+    'Alle Einzelkinder trinken.',
+
+
 
   ],
   K2: [  //Aufgabe
-    'Nenne die Nachnamen aller Spieler.',
+    'Nenne die Nachnamen aller Spieler. Wenn du einen Fehler machst, musst du 2 Schlücke trinken.',
     'Sage das Alphabet rückwärts auf. Wenn du einen Fehler machst, musst du dein Glas exen',
     'Zähle asiatische Hauptstädte auf. Du kannst aufhören, wann du willst, verlierst jedoch beim ersten Fehler und trinkst dann 3 Schlücke.',
     'Nenne direkte Nachbarländer von Deutschland. Du kannst aufhören, wann du willst, verlierst jedoch beim ersten Fehler und trinkst dann 3 Schlücke.',
@@ -107,7 +113,14 @@ var excercises = {
     'Du musst entscheiden: Wer würde am ehesten für immer auf Internet verzichten? Der Steinzeitmensch verteilt 3 Schlücke.',
     'Du musst entscheiden: Welcher Spieler würde eher ein Stalker werden? Nehmt euch in Acht und lasst denjenigen 3 Schlücke trinken.',
     'Du musst entscheiden: Welcher Spieler würde am ehesten eine Dating App nutzen? Der Tinderboy trinkt 4 Schlücke.',
-    'Verteile für jeden Buchstaben in deinem Namen einen Schluck.'
+    'Verteile für jeden Buchstaben in deinem Namen einen Schluck.',
+    'Nenne alle Planeten. Du kannst aufhören, wann du willst, verlierst jedoch beim ersten Fehler und trinkst dann 3 Schlücke.',
+    'Zähle deutsche Bundeskanzler auf. Du kannst aufhören, wann du willst, verlierst jedoch beim ersten Fehler und trinkst dann 4 Schlücke.',
+    'Überleg dir einen Reim in dem die Worte "Fisch" und "Garten" vorkommen. Du hast 30 Sekunden Zeit!',
+    'Sage die Geburtstage aller Spieler. Wenn du einen Fehler machst, musst du 3 Schlücke trinken.',
+    'Erzähle eine peinliche Kotz-Story! Trau dich oder trink 5 Schlücke.',
+    'Alle schütten nochmal etwas Alkohol in ihr Getränk.',
+
 
 
   ],
@@ -129,7 +142,12 @@ var excercises = {
     'Jeder Spieler sagt etwas, das er noch nie gemacht hat. Alle, die es schonmal gemacht haben, müssen 1 Schluck trinken',
     'Themenspiel: Dinge, die Frauen in der Handtasche haben. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 5 Schlücke trinken.',
     'Themenspiel: Gemüsesorten. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
-    'Zuerst Müsli oder Milch in die Schüssel? Stimmt in der Gruppe ab. Die Verlierer trinken 3 Schlücke.'
+    'Zuerst Müsli oder Milch in die Schüssel? Stimmt in der Gruppe ab. Die Verlierer trinken 3 Schlücke.';
+    'Themenspiel: Was Mamas gut können. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
+    'Charaktere aus The Big Bang Theory. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.'
+    'Lieber deinen Schlüssel oder dein Handy verlieren? Entscheidet in der Gruppe. Die Verlierer trinken 4 Schlücke.',
+    ''
+
 
 
   ],
@@ -144,6 +162,11 @@ var excercises = {
     'Wenn du blind wärst, wer aus der Runde wäre dein Blindenhund? Dein Helfer trinkt 3 Schlücke.',
     'Welche Straftat hast du schon begangen? Beantworte die Frage oder trinke 3 Schlücke.',
     'Wenn du ein Tier sein könntest, welches wäre das? Beantworte die Frage oder trinke 2 Schlücke.',
+    'Was würdest du tun, wenn du für einen Tag das andere Geschlecht wärst? Beantworte die Frage oder trinke 2 Schlücke.',
+    'Hast du schonmal Drogen genommen? Beantworte die Frage oder trinke 3 Schlücke.',
+    'Wann hattest du das letzte Mal einen Kater? Beantworte die Frage oder trinke 6 Schlücke.',
+    'Hast du schonmal bei einem Test gespickt? Beantworte die Frage oder trinke 3 Schlücke.',
+
 
 
   ],
@@ -154,9 +177,17 @@ var excercises = {
     'Du darfst alle Spieler nur noch mit Spitznamen ansprechen.',
     'Niemand darf mehr das Wort "Ja" sagen. Bei jedem Verstoß muss 1 Schluck getrunken werden.',
     'Du hast einen Joker! Wenn du ihn einsetzt kannst du jemand anderen an deiner Stelle trinken lassen.',
+    'Ab jetzt darf nicht mehr geflucht werden! Wer trotzdem ein Schimpfwort sagt, muss trinken.',
 
 
 
+  ],
+
+  K5: [  //Strafe
+    'Trinke dein Glas auf ex',
+    'Der Schluckspecht mag dich nicht! Deshalb musst du 5 Schlücke trinken.',
+    'Durch dein Verhalten hast du den Schluckspecht verärgert und musst 3 trinken.',
+    ''
 
 
   ]
