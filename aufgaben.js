@@ -21,7 +21,7 @@ function getExcercise(categoryID, excerciseID){
      case i:
       //eval("console.log('Kategorie "+i+"')");
       checkEx(excerciseID);
-      return checkEx(excerciseID) || eval("(getRandomInt(excercises.K"+i+".length+1))");
+      return checkEx(excerciseID) || eval("(getRandomInt(excercises.K"+i+".length-1)+1)");
     break;
     default:
     //console.log(i+" war es nicht");
@@ -61,6 +61,7 @@ function getExcercise(categoryID, excerciseID){
 
 var excercises = {
   K1: [  //Saufen
+    'Saufen',
     'Alle mit weißen Socken trinken.', //Index = [0]
     'Du und Person deiner Wahl trinkt.',
     'Alle mit einem Handy von Samsung trinken.',
@@ -96,6 +97,7 @@ var excercises = {
 
   ],
   K2: [  //Aufgabe
+    'Aufgabe',
     'Nenne die Nachnamen aller Spieler.',
     'Sage das Alphabet rückwärts auf. Wenn du einen Fehler machst, musst du dein Glas exen',
     'Zähle asiatische Hauptstädte auf. Du kannst aufhören, wann du willst, verlierst jedoch beim ersten Fehler und trinkst dann 3 Schlücke.',
@@ -112,6 +114,7 @@ var excercises = {
 
   ],
   K3: [  //Spiel
+    'Spiel',
     'Reime auf "Bier". Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
     'Reime auf "Flasche". Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
     'Entweder McDonalds oder Burger King. Stimmt in der Gruppe ab. Die Verlierer trinken 3 Schlücke.',
@@ -130,6 +133,7 @@ var excercises = {
 
   ],
   K4: [  //Wahrheit
+    'Wahrheit',
     'Welchen Spieler findest du am attraktivsten? Die Beautyqueen verteilt 3 Schlücke.',
     'Bist du schonmal fremdgegangen? Beantworte die Frage oder trinke 5 Schlücke.',
     'Hast du schonmal einen Strafzettel bekommen? Beantworte die Frage oder trinke 3 Schlücke.'
