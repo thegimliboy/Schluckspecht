@@ -114,25 +114,47 @@ var excercises = {
   K3: [  //Spiel
     'Reime auf "Bier". Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
     'Reime auf "Flasche". Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
-    'Entweder McDonalds oder Burger King. Stimmt in der Gruppe ab. Die Verlierer trinken 3 Schlücke.',
+    'McDonalds oder Burger King? Stimmt in der Gruppe ab. Die Verlierer trinken 3 Schlücke.',
     'Lieber reich und unglücklich oder arm und glücklich sein? Stimmt in der Gruppe ab. Die Verlierer trinken 4 Schlücke.',
     'Lieber alles sagen, was man denkt oder nie wieder etwas sagen können? Stimmt in der Gruppe ab. Die Verlierer trinken 2 Schlücke.',
     'Lieber nie wieder Pizza essen oder nie weder Döner essen? Stimmt in der Gruppe ab. Die Verlierer trinken 5 Schlücke.',
     'Lieber so lange Arme wie Beine haben oder so lange beine wie Arme? Stimmt in der Gruppe ab. Die Verlierer trinken 4 Schlücke.',
     'Lieber fliegen können oder unsichtbar sein? Stimmt in der Gruppe ab. Die Verlierer trinken 2 Schlücke.',
     'Themenspiel: Dinge, die man oft verliert. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
-    'Themenspiel: Dinge,die man gewinenn kann. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 4 Schlücke trinken.',
+    'Themenspiel: Dinge, die man gewinnen kann. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 4 Schlücke trinken.',
     'Themenspiel: Supermärkte in der Nähe. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 5 Schlücke trinken.',
     'Themenspiel: Bekannte Automarken. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 4 Schlücke trinken.',
     'Themenspiel: Bekannte Schuhmarken. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
     'Themenspiel: Berühmte Schauspieler. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
-    
+    'Jeder Spieler sagt etwas, das er noch nie gemacht hat. Alle, die es schonmal gemacht haben, müssen 1 Schluck trinken',
+    'Themenspiel: Dinge, die Frauen in der Handtasche haben. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 5 Schlücke trinken.',
+    'Themenspiel: Gemüsesorten. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlücke trinken.',
+    'Zuerst Müsli oder Milch in die Schüssel? Stimmt in der Gruppe ab. Die Verlierer trinken 3 Schlücke.'
+
 
   ],
   K4: [  //Wahrheit
     'Welchen Spieler findest du am attraktivsten? Die Beautyqueen verteilt 3 Schlücke.',
     'Bist du schonmal fremdgegangen? Beantworte die Frage oder trinke 5 Schlücke.',
     'Hast du schonmal einen Strafzettel bekommen? Beantworte die Frage oder trinke 3 Schlücke.',
+    'Was ist das Letzte, wonach du gegoogelt hast? Beantworte die Frage oder trinke 2 Schlücke.',
+    'Hast du schon mal einen Liebesbrief geschrieben? Beantworte die Frage oder trinke 3 Schlücke.',
+    'Was ist das Peinlichste, das du jemals gemacht hast? Beantworte die Frage oder trinke 5 Schlücke.',
+    'Was ist deine beste und was ist deine schlechteste Eigenschaft? Beantworte die Frage oder trinke 3 Schlücke.',
+    'Wenn du blind wärst, wer aus der Runde wäre dein Blindenhund? Dein Helfer trinkt 3 Schlücke.',
+    'Welche Straftat hast du schon begangen? Beantworte die Frage oder trinke 3 Schlücke.',
+    'Wenn du ein Tier sein könntest, welches wäre das? Beantworte die Frage oder trinke 2 Schlücke.',
+
+
+  ],
+
+  K5: [ //Regel
+    'Such dir deinen Trinkbuddy aus. Immer wenn du trinkst, muss dein Buddy auch trinken.',
+    'Bestimme eine Person, die in den nächsten 3 Runden doppelt so viel trinken muss wie du.',
+    'Du darfst alle Spieler nur noch mit Spitznamen ansprechen.',
+    'Niemand darf mehr das Wort "Ja" sagen. Bei jedem Verstoß muss 1 Schluck getrunken werden.',
+    'Du hast einen Joker! Wenn du ihn einsetzt kannst du jemand anderen an deiner Stelle trinken lassen.',
+
 
 
 
