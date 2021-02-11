@@ -124,6 +124,7 @@ function startGame(room) {
       for (var i=1;i<26;i++){
         //if (i < 10) {eval("rooms.room"+room+".addField("+i+")")} else {eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");};
         eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");
+        eval("if (typeof rooms.room"+room+".fields.canvas"+(i-1)+" !== 'undefined') {if (rooms.room"+room+".fields.canvas"+i+".category == rooms.room"+room+".fields.canvas"+(i-1)+".category) {rooms.room"+room+".fields.canvas"+i+".category = getExcercise();console.log('Da war ein Feld aber schwul; '+i)} }")
       }
 
       eval("io.to(room).emit('update_room', rooms.room"+room+")");
