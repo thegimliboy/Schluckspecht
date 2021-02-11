@@ -86,7 +86,6 @@ function Player (socketid, nickname) {
 function Field (feldnr) {
   this.location=feldnr;
   this.category=getExcercise();
-  //this.categoryname='';
 };
 
 

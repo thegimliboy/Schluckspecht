@@ -82,7 +82,7 @@ $(function(){
     //console.log(currTurn);
     $('#spielstand').append($('<li>').text(rresult));
     //$('#spielstand').append($('<li>').text(currTurn));
-    if (room.currQuestion == 'Not yet assigned') {} else {$('#spielstand').append($('<li>').text('Aufgabe: '+room.currQuestion))};
+    if (room.currQuestion == 'Not yet assigned') {} else {$('#spielstand').append($('<li>').text('Deswegen ist die Aufgabe: '+room.currQuestion))};
     $('#spielstand').append($('<li>').text(currTurn));
   });
 
