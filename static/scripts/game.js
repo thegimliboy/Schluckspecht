@@ -37,7 +37,10 @@ var border_lrIMG = new Image();
 border_lrIMG.src = "gfx/border_lr.png";
 var border_udIMG = new Image();
 border_udIMG.src = "gfx/border_ud.png";
-
+var border_1IMG = new Image();
+border_1IMG.src = "gfx/border_1.png";
+var border_25IMG = new Image();
+border_25IMG.src = "gfx/border_25.png";
 
 $(function(){
   var username = getParameterByName('username');
@@ -222,6 +225,12 @@ function doCanvasU(){
       case 18:
       case 22:
         eval("addToCanvas(i, border_udIMG)")
+        break;
+      case 1:
+        eval("addToCanvas(i, border_1IMG)")
+        break;
+      case 25:
+        eval("addToCanvas(i, border_25IMG)")
         break;
 
     }

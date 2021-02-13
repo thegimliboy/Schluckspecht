@@ -32,8 +32,9 @@ h1{
   float: left;
 }
 
-
 table {
-  border-spacing:0;
+  cellspacing: 0px;
+  cellpadding: 0px;
   border-collapse: collapse;
+  display: block;
 }
