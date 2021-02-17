@@ -11,6 +11,9 @@ body {
       width: 100%;
       height:100px;
       background: grey;
+      .leftheadline {
+        display: inline;
+      }
     }
     #header h1 {
     padding-top: 5px;
@@ -45,4 +48,15 @@ body {
     height: 250px;
     background: orange;
     float: right;
+    }
+    table {
+        border-spacing: 0px;
+        border-collapse: collapse;
+    }
+    td {
+      padding: 0px;
+    }
+
+    canvas {
+        display:block;
     }
