@@ -1,39 +1,62 @@
 body {
-    font-family: arial;
-    display: block;
-    height: 100%;
+  font-family: arial;
+      height: 100%;
+      background:lightblue;
+      text-align: center;
+    }
+    #website {
+      width:100 %;
+    }
+    #header {
+      width: 100%;
+      height:100px;
+      background: grey;
+      .leftheadline {
+        display: inline;
+      }
+    }
+    #header h1 {
+    padding-top: 5px;
+    font-size: 1.55em;
+    font-family: sans-serif;
+    color: white;
+    text-shadow: 0 0 5px black;
+    }
+    #main {
+      width:100%;
+    }
+    .tabelle {
+      display: inline;
+    }
+    #menu {
+      float: left;
+      width: 50%;
+      height: 250px;
+      background:blue;
+    }
+    #chat {
+    float: right;
+    width: 50%;
+    height: 350px;
+    background:darkred;
+.button {
+  display: inline-table;
 }
+    }
+    #footer {
+    width:50%;
+    height: 250px;
+    background: orange;
+    float: right;
+    }
+    table {
+        border-spacing: 0px;
+        border-collapse: collapse;
+    }
+    td {
+      padding: 0px;
+    }
 
-h1{
-  text-align: center;
-  background-color: #ffce80;
-}
-
-.left {
-  background-color: #ff9e2c;
-  float: left;
-  width: 80%;
-}
-
-.right {
-    background-color: #b6701e;
-    float: left;
-    width: 20%;
-}
-
-#logo {
-  display: table-cell;
-  width: 100%;
-}
-
-#logo img {
-  width: 30%;
-  height: auto;
-  float: left;
-}
-
-
-table {
-  border-spacing:0;
-  border-collapse: collapse;
-}
+    canvas {
+        display:block;
+    }
