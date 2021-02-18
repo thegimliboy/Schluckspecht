@@ -21,7 +21,7 @@ function getExcercise(categoryID, excerciseID){
      case i:
       //eval("console.log('Kategorie "+i+"')");
       checkEx(excerciseID);
-      return checkEx(excerciseID) || eval("(getRandomInt(excercises.K"+i+".length))");
+      return checkEx(excerciseID) || eval("(getRandomInt(excercises.K"+i+".length-1)+1)");
     break;
     default:
     //console.log(i+" war es nicht");
@@ -61,6 +61,7 @@ function getExcercise(categoryID, excerciseID){
 
 var excercises = {
   K1: [  //Saufen
+    'Saufen',
     'Alle mit weißen Socken trinken.', //Index = [0]
     'Du und die Person deiner Wahl trinkt.',
     'Alle mit einem Handy von Samsung trinken.',
@@ -98,11 +99,9 @@ var excercises = {
     'Trinke, wenn du einen Fake-Account auf Instagram hast.',
     'Alle Einzelkinder trinken.',
     'Alle, die über einen Freund Netflix schauen, trinken'
-
-
-
   ],
   K2: [  //Aufgabe
+    'Aufgabe',
     'Nenne die Nachnamen aller Spieler. Wenn du einen Fehler machst, musst du 2 Schlucke trinken.',
     'Sage das Alphabet rückwärts auf. Wenn du einen Fehler machst, musst du dein Glas exen.',
     'Zähle asiatische Hauptstädte auf. Du kannst aufhören, wann du willst, verlierst jedoch beim ersten Fehler und trinkst dann 3 Schlucke.',
@@ -127,14 +126,9 @@ var excercises = {
     'Du musst entscheiden: Welcher Spieler kommt am ehesten ins Gefängnis? Der Sträfling trinkt 4 Schlucke.',
     'Du musst entscheiden: Welcher Spieler würde am ehesten in RTL-Trashserien mitspielen? Die Trashqueen trinkt 3 Schlucke.',
     'Du musst entscheiden: Welcher Spieler würde am ehesten ein Straßenschild klauen? Der Dieb verteilt 4 Schlucke.'
-
-
-
-
-
-
   ],
   K3: [  //Spiel
+    'Spiel',
     'Reime auf "Bier". Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlucke trinken. Du beginnst.',
     'Reime auf "Flasche". Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlucke trinken. Du beginnst.',
     'McDonalds oder Burger King? Stimmt in der Gruppe ab. Die Verlierer trinken 3 Schlucke.',
@@ -162,11 +156,9 @@ var excercises = {
     'Themenspiel: Soziale Netzwerke. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 4 Schlucke trinken. Du fängst an.',
     'Vodka oder Rum? Stimmt in der Gruppe ab. Die Verlierer trinken einen Shot.',
     'Themenspiel: Straßenschilder, die die Farbe Rot enthalten. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 5 Schlucke trinken. Du fängst an.'
-
-
-
-  ],
+    ],
   K4: [  //Wahrheit
+    'Wahrheit',
     'Bist du schon mal fremdgegangen? Beantworte die Frage oder trinke 5 Schlucke.',
     'Hast du schon mal einen Strafzettel bekommen? Beantworte die Frage oder trinke 3 Schlucke.',
     'Was ist das Letzte, wonach du gegoogelt hast? Beantworte die Frage oder trinke 2 Schlucke.',
@@ -187,14 +179,9 @@ var excercises = {
     'Hast du schon mal jemanden angezeigt? Beantworte die Frage oder trinke 3 Schlucke.',
     'Hast du schon mal komplett angezogen geschlafen, weil du zu betrunken warst dich auszuziehen? Beantworte die Frage oder trinke 3 Schlucke.',
     'Wann warst du das letzte Mal betrunken? Beantworte die Frage oder trinke 3 Schlucke.'
-
-
-
-
-
-  ],
-
+    ],
   K5: [ //Regel
+    'Regel',
     'Such dir deinen Trinkbuddy aus. Immer wenn du trinkst, muss dein Buddy auch trinken.',
     'Bestimme eine Person, die in den nächsten 3 Runden doppelt so viel trinken muss wie du.',
     'Du darfst alle Spieler nur noch mit Spitznamen ansprechen.',
@@ -206,12 +193,9 @@ var excercises = {
     'Bevor getrunken wird muss ein Trinkspruch gesagt werden.',
     'Ihr dürft euer Getränk nicht mehr loslassen. Wer trotzdem loslässt, muss 5 Schlucke trinken.',
     'Immer, wenn jemand das Wort "Alkohol" sagt, muss getrunken werden.'
-
-
-
-  ],
-
-  K5: [  //Strafe
+    ],
+  K6: [ //Strafe
+    'Strafe',
     'Trinke dein Glas auf ex',
     'Der Schluckspecht mag dich nicht! Deshalb musst du 5 Schlucke trinken.',
     'Durch dein Verhalten hast du den Schluckspecht verärgert und musst 3 trinken.',
@@ -226,10 +210,6 @@ var excercises = {
     'Trink 10!',
     'Die anderen Spieler können entscheiden, wie viele Schlucke du trinkst.',
     'Alle trinken einen Shot!'
-
-
-
-
   ]
 };
 
