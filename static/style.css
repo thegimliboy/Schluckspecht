@@ -9,18 +9,18 @@ body {
     }
     #header {
       width: 100%;
-      height:100px;
+      height:85px;
       background: grey;
-      .leftheadline {
-        display: inline;
-      }
+      margin-bottom: 2px;
+
     }
-    #header h1 {
-    padding-top: 5px;
-    font-size: 1.55em;
+    #header {
+    font-size: 0.75em;
     font-family: sans-serif;
     color: white;
     text-shadow: 0 0 5px black;
+    display: flex;
+
     }
     #main {
       width:100%;
@@ -34,20 +34,13 @@ body {
       height: 250px;
       background:blue;
     }
-    #chat {
-    float: right;
-    width: 50%;
-    height: 350px;
-    background:darkred;
-.button {
-  display: inline-table;
-}
-    }
-    #footer {
+    #online {
     width:50%;
     height: 250px;
     background: orange;
-    float: right;
+    float: left;
+    font-size: 1.5em;
+    color: black;
     }
     table {
         border-spacing: 0px;

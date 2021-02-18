@@ -14,22 +14,22 @@
     <meta name="theme-color" content="#ffffff">
   </head>
   <body>
+    <div id="website">
 
-    <header class='headline'>
+    <header class='Spieltitel'>
       <a href="join.html">
         <h1 id='headline1'>
           <img src = "gfx/logo.png" style="width: 15vw" alt="Schluckspecht">  <!--Schluckspecht: Der Titel-->
         </h1>
       </a>
     </header>
-
-      <div class="oben">
-        <div id="website">
-          <div id="header">
+        <div id="header">
           <h2 id="spieltitel"> Schluckspecht: Das Spiel </h2>
+          <ul id="spielstand"></ul>
             <div id="button">
               <button type="button1" id="setReady" onclick="ready();" style="visibility: hidden;"> Bereit </button>
               <button type="button2" id="roll" onclick="roll();" style="visibility: hidden;"> W&uuml;rfeln </button>
+
             </div>
           </div>
           <table class="tabelle">
@@ -71,7 +71,7 @@
           </table>
           <div id="main">
             <div id="menu">
-              <div class="unten">
+
             <p id="OLcount"> Aktuell Online: </p>
             <ul id="currOnline"></ul>
           </div>
@@ -79,10 +79,10 @@
 
               </div>
             </div>
-            <div id="footer">
+            <div id="online">
               <p> Chat </p>
               <div
-              style ="height:60%;width:100%;border:1px solid #ccc;font:15px/26px arial;overflow:auto;">
+              style ="height:70%;width:50%;border:1px solid #orange;font:15px/26px arial;overflow:auto;">
               <ul id="nachrichten"></ul>
               <form action="">
                 <input id="cn" autocomplete="off" />
