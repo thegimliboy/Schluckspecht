@@ -12,6 +12,7 @@ body {
       height:85px;
       background: grey;
       margin-bottom: 5px;
+      border-radius: 6px;
 
     }
     #header {
@@ -35,6 +36,7 @@ body {
       background:blue;
       color: white;
       margin-top: 5px;
+      border-radius:6px;
     }
     #online {
     width:50%;
@@ -44,6 +46,7 @@ body {
     font-size: 1.5em;
     color: black;
     margin-top: 5px;
+    border-radius:6px;
     }
     table {
         border-spacing: 0px;
