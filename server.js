@@ -12,7 +12,8 @@
 //Nach würfeln "gemacht"-Knopf, damit der nächste Würfeln kann
 //Dynamische Feldgröße. Host kann Feldmaße selbst bestimmen durch parameter, die dann mit for-Schleifen die Canvastabellen erstellen
 //Frountend Englischer Text -> Deutscher Text
-//
+//Aufgabenkategorie vor Aufgabe schreiben
+//Pfeilw unter Spieler
 
 var express = require('express');
 var app = express();

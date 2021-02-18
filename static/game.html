@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Schluckspecht</title>
@@ -14,6 +14,7 @@
     <meta name="theme-color" content="#ffffff">
   </head>
   <body>
+
     <header class='headline'>
       <a href="join.html">
         <h1 id='headline1'>
@@ -22,66 +23,75 @@
       </a>
     </header>
 
-    <section class="left">
-      <div class='leftheadline'>
-        <h2 id="spieltitel"> Schluckspecht: Das Spiel </h2>
-      </div>
-      <ul id="spielstand"></ul>
-      <button type="button" id="setReady" onclick="ready();" style="visibility: hidden;"> Bereit </button>
-      <button type="button" id="roll" onclick="roll();" style="visibility: hidden;"> W&uuml;rfeln </button>
-      <!-- <canvas width=350 height=725 id="Buttons"></canvas> -->
-      <!-- inline table:  cellspacing="0" cellpadding="0" border-collapse="collapse" display="block" -->
-        <table>
-        	 <tr>
-        		<td><canvas width=220 height=145 id="canvas13" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas12" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas11" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas10" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas9" style="background-image: url('gfx/feld.png')"></canvas></td>
-        	</tr>
-        	<tr>
-        		<td><canvas width=220 height=145 id="canvas14" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas23" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas22" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas21" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas8" style="background-image: url('gfx/feld.png')"></canvas></td>
-        	</tr>
-        	 <tr>
-        		<td><canvas width=220 height=145 id="canvas15" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas24" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas25" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas20" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas7" style="background-image: url('gfx/feld.png')"></canvas></td>
-        	</tr>
-        	<tr>
-        		<td><canvas width=220 height=145 id="canvas16" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas17" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas18" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas19" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas6" style="background-image: url('gfx/feld.png')"></canvas></td>
-        	</tr>
-        		 <tr>
-        		<td><canvas width=220 height=145 id="canvas1" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas2" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas3" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas4" style="background-image: url('gfx/feld.png')"></canvas></td>
-        		<td><canvas width=220 height=145 id="canvas5" style="background-image: url('gfx/feld.png')"></canvas></td>
-        	</tr>
-        </table>
-    </section>
-
-    <section class="right">
       <div class="oben">
-        <p> Chat </p>
-        <ul id="nachrichten"></ul>
-        <form action="">
-          <input id="cn" autocomplete="off" />
-          <button>Send</button>
-        </form>
-      </div>
-      <div class="unten">
-        <p id="OLcount"> Aktuell Online: </p>
-        <ul id="currOnline"></ul>
+        <div id="website">
+          <div id="header">
+          <h2 id="spieltitel"> Schluckspecht: Das Spiel </h2>
+            <div id="button">
+              <button type="button1" id="setReady" onclick="ready();" style="visibility: hidden;"> Bereit </button>
+              <button type="button2" id="roll" onclick="roll();" style="visibility: hidden;"> W&uuml;rfeln </button>
+            </div>
+          </div>
+          <table class="tabelle">
+             <tr>
+              <td><canvas width=220 height=145 id="canvas13" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas12" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas11" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas10" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas9" style="background-image: url('gfx/feld.png')"></canvas></td>
+            </tr>
+            <tr>
+              <td><canvas width=220 height=145 id="canvas14" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas23" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas22" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas21" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas8" style="background-image: url('gfx/feld.png')"></canvas></td>
+            </tr>
+             <tr>
+              <td><canvas width=220 height=145 id="canvas15" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas24" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas25" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas20" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas7" style="background-image: url('gfx/feld.png')"></canvas></td>
+            </tr>
+            <tr>
+              <td><canvas width=220 height=145 id="canvas16" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas17" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas18" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas19" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas6" style="background-image: url('gfx/feld.png')"></canvas></td>
+            </tr>
+               <tr>
+              <td><canvas width=220 height=145 id="canvas1" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas2" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas3" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas4" style="background-image: url('gfx/feld.png')"></canvas></td>
+              <td><canvas width=220 height=145 id="canvas5" style="background-image: url('gfx/feld.png')"></canvas></td>
+            </tr>
+          </table>
+          <div id="main">
+            <div id="menu">
+              <div class="unten">
+            <p id="OLcount"> Aktuell Online: </p>
+            <ul id="currOnline"></ul>
+          </div>
+            </div>
+
+              </div>
+            </div>
+            <div id="footer">
+              <p> Chat </p>
+              <div
+              style ="height:60%;width:100%;border:1px solid #ccc;font:15px/26px arial;overflow:auto;">
+              <ul id="nachrichten"></ul>
+              <form action="">
+                <input id="cn" autocomplete="off" />
+                <button>Send</button>
+              </form>
+            </div>
+            </div>
+          </div>
+          </div>
       </div>
     </section>
 

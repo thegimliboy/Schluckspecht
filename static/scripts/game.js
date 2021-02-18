@@ -69,7 +69,7 @@ $(function(){
   socket.on('your_room_is', (gameroom) => {
       gamecode = gameroom;
       console.log('new room: '+gameroom);
-      document.getElementById('spieltitel').innerHTML = 'Schluckspecht: Das Spiel \t | Gamecode: '+gameroom+' \t | Username: '+username;
+      document.getElementById('spieltitel').innerHTML = 'Gamecode: '+gameroom+' \t | Username: '+username;
       document.getElementById('setReady').style.visibility = 'visible';
   });
 
