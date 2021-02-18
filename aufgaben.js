@@ -146,9 +146,9 @@ var excercises = {
     'Jeder Spieler sagt etwas, das er noch nie gemacht hat. Alle, die es schonmal gemacht haben, müssen 1 Schluck trinken. Du fängst an.',
     'Themenspiel: Dinge, die Frauen in der Handtasche haben. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 5 Schlucke trinken. Du fängst an.',
     'Themenspiel: Gemüsesorten. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlucke trinken. Du fängst an.',
-    'Zuerst Müsli oder Milch in die Schüssel? Stimmt in der Gruppe ab. Die Verlierer trinken 3 Schlucke.';
+    'Zuerst Müsli oder Milch in die Schüssel? Stimmt in der Gruppe ab. Die Verlierer trinken 3 Schlucke.',
     'Themenspiel: Was Mamas gut können. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlucke trinken. Du fängst an.',
-    'Themenspiel: Charaktere aus The Big Bang Theory. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlucke trinken. Du fängst an.'
+    'Themenspiel: Charaktere aus The Big Bang Theory. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 3 Schlucke trinken. Du fängst an.',
     'Lieber deinen Schlüssel oder dein Handy verlieren? Entscheidet in der Gruppe. Die Verlierer trinken 4 Schlucke.',
     'Lieber Urlaub in den Bergen oder am Strand? Entscheidet in der Gruppe. Die Verlierer trinken 5 Schlucke.',
     'Themenspiel: Netflix Originalserien. Wem nichts mehr einfällt oder etwas doppelt sagt, muss 5 Schlucke trinken.',
