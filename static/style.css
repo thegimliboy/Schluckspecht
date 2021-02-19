@@ -22,7 +22,7 @@ body {
 
 #gamestate {
   width: 70%;
-  height:55px;
+  height:75px;
   background: grey;
   margin-bottom: 12px;
   border-radius: 12px;
@@ -30,11 +30,12 @@ body {
   color: white;
   text-shadow: 0 0 5px black;
   float: left;
+  font-size: 1em;
 }
 
 #button {
   width: 30%;
-  height:55px;
+  height:75px;
   background: grey;
   margin-bottom: 12px;
   border-radius: 12px;
