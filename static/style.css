@@ -11,18 +11,38 @@ body {
 
 #header {
    width: 100%;
-   height:85px;
+   height:55px;
    background: grey;
-   margin-bottom: 12px;
    border-radius: 12px;
+   font-size: 1em;
+   font-family: sans-serif;
+   color: white;
+   text-shadow: 0 0 5px black;
 }
 
-#header {
+#gamestate {
+  width: 70%;
+  height:55px;
+  background: grey;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  font-size: 0.5em;
+  color: white;
+  text-shadow: 0 0 5px black;
+  display: inline;
+}
+
+#button {
+  width: 30%;
+  height:55px;
+  background: grey;
+  margin-bottom: 12px;
+  border-radius: 12px;
   font-size: 1em;
   font-family: sans-serif;
   color: white;
   text-shadow: 0 0 5px black;
-  display: flex;
+  float: right;
 }
 
 #main {
