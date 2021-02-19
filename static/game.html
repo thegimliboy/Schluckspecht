@@ -14,12 +14,11 @@
     <meta name="theme-color" content="#ffffff">
   </head>
   <body>
-    <div id="website">
-
+    <div id="obenmitte">
     <header class='Spieltitel'>
       <a href="join.html">
-        <h1 id='headline1'>
-          <img src = "gfx/logo.png" style="width: 15vw" alt="Schluckspecht">  <!--Schluckspecht: Der Titel-->
+        <h1 id='logo'>
+          <img src = "gfx/logo.png" style="width: 20vw" alt="Schluckspecht">  <!--Schluckspecht: Der Titel-->
         </h1>
       </a>
     </header>
@@ -69,26 +68,27 @@
               <td><canvas width=220 height=145 id="canvas5" style="background-image: url('gfx/feld.png')"></canvas></td>
             </tr>
           </table>
-          <div id="main">
-            <div id="menu">
+<div id="bottom">
+  <div id="online" style="height:300px;width:50%;border:1px;">
 
             <p id="OLcount"> Aktuell Online: </p>
             <ul id="currOnline"></ul>
-          </div>
-            </div>
+  </div>
+    <div id="chat" style="height:300px;width:50%;border:1px solid #orange;font:15px/26px arial;">
+            <p> Chat </p>
+     <div
+            style ="height:70%;width:100%;border:1px solid #orange;font:15px/26px arial;overflow:auto;">
+            <ul id="nachrichten"></ul>
+
+     </div>
+     <form action="">
+       <input id="cn" autocomplete="off" />
+       <button>Send</button>
+     </form>
+    </div>
+</div>
 
               </div>
-            </div>
-            <div id="online">
-              <p> Chat </p>
-              <div
-              style ="height:70%;width:50%;border:1px solid #orange;font:15px/26px arial;overflow:auto;">
-              <ul id="nachrichten"></ul>
-              <form action="">
-                <input id="cn" autocomplete="off" />
-                <button>Send</button>
-              </form>
-            </div>
             </div>
           </div>
           </div>

@@ -1,61 +1,68 @@
 body {
   font-family: arial;
-      height: 100%;
-      background:lightblue;
-      text-align: center;
-    }
-    #website {
-      width:100 %;
-    }
-    #header {
-      width: 100%;
-      height:85px;
-      background: grey;
-      margin-bottom: 5px;
-      border-radius: 6px;
+  height: 100%;
+  background:lightblue;
+  text-align: center;
+}
 
-    }
-    #header {
-    font-size: 1em;
-    font-family: sans-serif;
-    color: white;
-    text-shadow: 0 0 5px black;
-    display: flex;
+#obenmitte {
+  width:100 %;
+}
 
-    }
-    #main {
-      width:100%;
-    }
-    .tabelle {
-      display: inline;
-    }
-    #menu {
-      float: left;
-      width: 50%;
-      height: 250px;
-      background:blue;
-      color: white;
-      margin-top: 5px;
-      border-radius:6px;
-    }
-    #online {
-    width:50%;
-    height: 250px;
-    background: orange;
-    float: left;
-    font-size: 1.5em;
-    color: black;
-    margin-top: 5px;
-    border-radius:6px;
-    }
-    table {
-        border-spacing: 0px;
-        border-collapse: collapse;
-    }
-    td {
-      padding: 0px;
-    }
+#header {
+   width: 100%;
+   height:85px;
+   background: grey;
+   margin-bottom: 12px;
+   border-radius: 12px;
+}
 
-    canvas {
-        display:block;
-    }
+#header {
+  font-size: 1em;
+  font-family: sans-serif;
+  color: white;
+  text-shadow: 0 0 5px black;
+  display: flex;
+}
+
+#main {
+  width:100%;
+}
+
+.tabelle {
+  display: inline;
+}
+
+#online {
+  float: left;
+  width: 50%;
+  height: 250px;
+  background:blue;
+  color: white;
+  margin-top: 12px;
+  border-radius:12px;
+}
+
+#chat {
+  width:50%;
+  height: 250px;
+  background: orange;
+  float: left;
+  font-size: 1.5em;
+  color: black;
+  margin-top: 12px;
+  border-radius:12px;
+}
+
+table {
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0px;
+}
+
+canvas {
+  display:block;
+}
