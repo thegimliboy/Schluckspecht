@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <title>Join Game</title>
+    <title>Raum erstellen</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
@@ -19,10 +19,21 @@
         <img src = "gfx/logo.png" style="width: 15vw" alt="Schluckspecht">  <!--Schluckspecht: Der Titel-->
       </h1>
     </a>
+    <h2>Gameroom erstellen</h2>
 
-      <button onclick="location.href='join.html';">Spiel beitreten</button>
-      <button onclick="location.href='host.html';">Spiel erstellen</button>
+    <form action="">
+      <p> Nickname: </p>
+      <input id="username" autocomplete="off" required="required"/>
+      <br>
+      <button>Raum erstellen</button>
+    </form>
 
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script> var socket = io(); </script>
+
+    <script src="/scripts/join.js"></script>
 
   </body>
 </html>

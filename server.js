@@ -125,7 +125,7 @@ function startGame(room) {
       for (var i=1;i<26;i++){
         //if (i < 10) {eval("rooms.room"+room+".addField("+i+")")} else {eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");};
         eval("rooms.room"+room+".fields.canvas"+i+" = new Field (i)");
-        eval("if (typeof rooms.room"+room+".fields.canvas"+(i-1)+" !== 'undefined') {if (rooms.room"+room+".fields.canvas"+i+".category == rooms.room"+room+".fields.canvas"+(i-1)+".category) {rooms.room"+room+".fields.canvas"+i+".category = getExcercise();console.log('Da war ein Feld aber kacke; '+i)} }")
+        eval("if (typeof rooms.room"+room+".fields.canvas"+(i-1)+" !== 'undefined') {if (rooms.room"+room+".fields.canvas"+i+".category == rooms.room"+room+".fields.canvas"+(i-1)+".category) {rooms.room"+room+".fields.canvas"+i+".category = getExcercise();console.log('Feld neu ausgewählt: '+i)} }")
       }
 
       eval("io.to(room).emit('update_room', rooms.room"+room+")");
@@ -205,8 +205,8 @@ io.on('connection', (socket) => {
       if (index > -1) {
       players.splice(index, 1);
     }*/
-      if (checkRoom(room)===1){
-        eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' disconnected')");
+      if (eval("checkRoom(room)===1 && typeof rooms.room"+room+".id"+id+" !== 'undefined'")){
+        eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' hat die Verbindung getrennt')");
         eval('rooms.room'+room+'.removePlayer(id)');
 //        eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
         eval("io.to(room).emit('update_room', rooms.room"+room+")");
@@ -262,7 +262,7 @@ console.log('-------------------------------------------------------------------
     eval('rooms.room'+room+'.addPlayer(id,socketuser)');
     socket.emit('your_room_is', room);
 //    eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
-    eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
+    eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' hat sich verbunden')");
 //    eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
     eval("rooms.room"+room+".player.id"+id+".isAdmin = 1");
     eval("io.to(room).emit('update_room', rooms.room"+room+")");
@@ -276,12 +276,15 @@ console.log('-------------------------------------------------------------------
     id = id.replace(/[^a-zA-Z ]/g, "");
 //    console.log('Clean ID: '+id);
     if (checkRoom(room) === 1) {
-      eval('rooms.room'+room+'.addPlayer(id,socketuser)');
-      eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
-//      eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
-//      eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
-      eval("io.to(room).emit('update_room', rooms.room"+room+")");
-      if (eval("rooms.room"+room+".running === 1")) {socket.emit('gamestart')};
+      if (eval("rooms.room"+room+".players.length > 7")) {socket.disconnect();}
+      else {
+        eval('rooms.room'+room+'.addPlayer(id,socketuser)');
+        eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' hat sich verbunden')");
+  //      eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
+  //      eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+        eval("io.to(room).emit('update_room', rooms.room"+room+")");
+        if (eval("rooms.room"+room+".running === 1")) {socket.emit('gamestart')};
+      }
     };
     socket.emit('your_room_is', room);
   });
