@@ -89,6 +89,7 @@ $(function(){
 
   socket.on('nachricht', function(msg){
     $('#nachrichten').append($('<li>').text(msg));
+    document.getElementById('nachrichten').scrollIntoView({ behavior: 'smooth', block: 'end' });
   });
 
   socket.on('gamestate', function(rresult, currTurn){

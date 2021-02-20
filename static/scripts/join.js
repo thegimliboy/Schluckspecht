@@ -14,7 +14,7 @@ var gamecode;
       window.location.href = 'game.html?username='+$('#username').val()+'&gamecode='+$('#gamecode').val();
     }
     else {
-      if ($('#gamecode').val() === '') {
+      if ($('#gamecode').val() === '' || typeof $('#gamecode').val() == 'undefined') {
       window.location.href = 'game.html?username='+$('#username').val();
       }
       else {window.alert('Gamecode nicht vergeben');}
