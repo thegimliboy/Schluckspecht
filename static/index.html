@@ -14,21 +14,15 @@
     <meta name="theme-color" content="#ffffff">
   </head>
   <body>
-    <h1> Startseite: Spielbeitritt </h1>
+    <a href="index.html">
+      <h1 id='headline1'>
+        <img src = "gfx/logo.png" style="width: 15vw" alt="Schluckspecht">  <!--Schluckspecht: Der Titel-->
+      </h1>
+    </a>
 
-    <form action="">
-      <p> Spielcode (frei lassen wenn Host): </p>
-      <input id="gamecode" autocomplete="off" />
-      <br>
-      <p> Nickname: </p>
-      <input id="username" autocomplete="off" required="required"/>
-      <br>
-      <button>Los geht's</button>
-    </form>
+      <button onclick="location.href='join.html';">Spiel beitreten</button>
+      <button onclick="location.href='host.html';">Spiel erstellen</button>
 
-
-
-    <script>window.location.href = 'join.html'</script>
 
   </body>
 </html>
