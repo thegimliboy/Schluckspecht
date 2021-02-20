@@ -1,5 +1,6 @@
 body {
   font-family: arial;
+<<<<<<< Updated upstream
       height: 100%;
       background:lightblue;
       text-align: center;
@@ -60,3 +61,91 @@ body {
     canvas {
         display:block;
     }
+=======
+  height: 100%;
+  background:lightblue;
+  text-align: center;
+}
+
+#obenmitte {
+  width:100 %;
+}
+
+#header {
+   width: 100%;
+   height:55px;
+   background: grey;
+   border-radius: 12px;
+   font-size: 1em;
+   font-family: sans-serif;
+   color: white;
+   text-shadow: 0 0 5px black;
+}
+
+#gamestate {
+  width: 70%;
+  height:55px;
+  background: grey;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  font-size: 0.5em;
+  color: white;
+  text-shadow: 0 0 5px black;
+  float: left;
+}
+
+#button {
+  width: 30%;
+  height:55px;
+  background: grey;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  font-size: 1em;
+  font-family: sans-serif;
+  color: white;
+  text-shadow: 0 0 5px black;
+  float: right;
+}
+
+#main {
+  width:100%;
+}
+
+.tabelle {
+  display: inline;
+}
+
+#online {
+  float: left;
+  width: 50%;
+  height: 250px;
+  background:blue;
+  color: white;
+  margin-top: 12px;
+  border-radius:12px;
+}
+
+#chat {
+  width:50%;
+  height: 250px;
+  background: orange;
+  float: left;
+  font-size: 1.5em;
+  color: black;
+  margin-top: 12px;
+  border-radius:12px;
+}
+
+table {
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0px;
+}
+
+canvas {
+  display:block;
+}
+>>>>>>> Stashed changes

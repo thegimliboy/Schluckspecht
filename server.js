@@ -205,7 +205,7 @@ io.on('connection', (socket) => {
       if (index > -1) {
       players.splice(index, 1);
     }*/
-      if (checkRoom(room)===1){
+      if (eval("checkRoom(room)===1 && typeof rooms.room"+room+".id"+id+" !== 'undefined'")){
         eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' disconnected')");
         eval('rooms.room'+room+'.removePlayer(id)');
 //        eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
@@ -276,12 +276,15 @@ console.log('-------------------------------------------------------------------
     id = id.replace(/[^a-zA-Z ]/g, "");
 //    console.log('Clean ID: '+id);
     if (checkRoom(room) === 1) {
-      eval('rooms.room'+room+'.addPlayer(id,socketuser)');
-      eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
-//      eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
-//      eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
-      eval("io.to(room).emit('update_room', rooms.room"+room+")");
-      if (eval("rooms.room"+room+".running === 1")) {socket.emit('gamestart')};
+      if (eval("rooms.room"+room+".players.length > 7")) {socket.disconnect();}
+      else {
+        eval('rooms.room'+room+'.addPlayer(id,socketuser)');
+        eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' connected')");
+  //      eval("console.log('Inspect room: '+ util.inspect(rooms.room"+room+"))");
+  //      eval("io.to(room).emit('currOnline', rooms.room"+room+".players)");
+        eval("io.to(room).emit('update_room', rooms.room"+room+")");
+        if (eval("rooms.room"+room+".running === 1")) {socket.emit('gamestart')};
+      }
     };
     socket.emit('your_room_is', room);
   });
