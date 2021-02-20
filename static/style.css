@@ -1,19 +1,27 @@
 body {
   font-family: arial;
   height: 100%;
-  background:lightblue;
+  background-image: linear-gradient(to right, #9479ff , #7ad4ff);
   text-align: center;
 }
 
-#obenmitte {
-  width:100 %;
+#block {
+  height: 200px;
+  background-image: linear-gradient(to right, #7350ff , #35beff);
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: 0 0 7pt 1pt black;
+  margin-bottom: 20px;
+  padding: 1px 1px 1px 1px;
 }
 
-#header {
+#oben {
+  width:100 %;
+  padding: 5px;
+}
+
+#head {
    width: 100%;
    height:55px;
-   background: grey;
-   border-radius: 12px;
    font-size: 1em;
    font-family: sans-serif;
    color: white;
@@ -23,22 +31,17 @@ body {
 #gamestate {
   width: 70%;
   height:75px;
-  background: grey;
-  margin-bottom: 12px;
-  border-radius: 12px;
   font-size: 0.5em;
   color: white;
   text-shadow: 0 0 5px black;
   float: left;
   font-size: 1em;
+  text-align: left;
 }
 
 #button {
   width: 30%;
   height:75px;
-  background: grey;
-  margin-bottom: 12px;
-  border-radius: 12px;
   font-size: 1em;
   font-family: sans-serif;
   color: white;
@@ -58,21 +61,30 @@ body {
   float: left;
   width: 50%;
   height: 250px;
-  background:blue;
+  background:#6f6fff;
   color: white;
   margin-top: 12px;
   border-radius:12px;
+  text-align: center;
 }
 
 #chat {
   width:50%;
   height: 250px;
-  background: orange;
+  background: #42c8ff;
   float: left;
   font-size: 1.5em;
   color: black;
   margin-top: 12px;
   border-radius:12px;
+}
+
+#messages {
+  text-align: left;
+}
+
+ul {
+  list-style: none;
 }
 
 table {

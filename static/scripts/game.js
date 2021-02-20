@@ -4,7 +4,8 @@ for (var i=1;i<26;i++){
   eval("feld = document.getElementById('canvas"+i+"')");
   var ctx = feld.getContext("2d");
   ctx.font = "60px Arial";
-  ctx.fillText(i, 90, 90);
+  ctx.textAlign = "center";
+  ctx.fillText(i, 110, 90);
 }
 
 var saufenIMG = new Image();
@@ -99,7 +100,7 @@ $(function(){
     //console.log(currTurn);
     $('#spielstand').append($('<li>').text(rresult));
     //$('#spielstand').append($('<li>').text(currTurn));
-    if (room.currQuestion == 'Not yet assigned') {} else {$('#spielstand').append($('<li>').text('Deswegen ist die Aufgabe: '+room.currQuestion))};
+    if (room.currQuestion == 'Not yet assigned') {} else {$('#aufgabe').append($('<li>').text('Aktuelle Aufgabe: ')); $('#aufgabe').append($('<li>').text(room.currQuestion))};
     $('#spielstand').append($('<li>').text(currTurn));
   });
 
@@ -176,20 +177,6 @@ function doCanvasU(){
         console.log("Irgendwas lief schief. Kein Bild für Kategorie definiert?")
         break;
     }
-    //Zeichne Player; i=Canvas
-    for (var pX in room.player) {
-      eval("pX = room.player."+pX);
-      //console.log("pX.pname: "+pX.pname+"; pX.gamestate: "+pX.gamestate+"; i: "+i)
-      if (pX.gamestate == i) {
-        for (var j = 0; j<room.players.length; j++){
-          if (room.players[j] == pX.pname) {
-            j = j+1
-            eval("addToCanvas(i, p"+j+")");
-            console.log("Added to "+i+"; p"+j)
-          }
-        }
-      }
-    }
 
     switch(i) {
       case 16:
@@ -233,8 +220,23 @@ function doCanvasU(){
       case 25:
         eval("addToCanvas(i, border_25IMG)")
         break;
-
     }
+
+    //Zeichne Player; i=Canvas
+    for (var pX in room.player) {
+      eval("pX = room.player."+pX);
+      //console.log("pX.pname: "+pX.pname+"; pX.gamestate: "+pX.gamestate+"; i: "+i)
+      if (pX.gamestate == i) {
+        for (var j = 0; j<room.players.length; j++){
+          if (room.players[j] == pX.pname) {
+            j = j+1
+            eval("addToCanvas(i, p"+j+")");
+            console.log("Added to "+i+"; p"+j)
+          }
+        }
+      }
+    }
+
   }
 }
 

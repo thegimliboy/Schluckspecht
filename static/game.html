@@ -14,7 +14,7 @@
   <meta name="theme-color" content="#ffffff">
   </head>
   <body>
-    <div id="obenmitte">
+    <div id="oben">
       <header class='Spieltitel'>
         <a href="index.html">
           <h1 id='logo'>
@@ -22,18 +22,22 @@
           </h1>
         </a>
       </header>
-        <div id="header">
+      <div id="block">
+        <div id="head">
           <h2 id="spieltitel"> Schluckspecht: Das Spiel </h2>
         </div>
-          <div id="gamestate">
-            <ul id="spielstand"> </ul>
-          </div>
-              <div id="button">
-                <button type="button1" id="setReady" onclick="ready();" style="visibility: hidden;"> Bereit </button>
-                <button type="button2" id="roll" onclick="roll();" style="visibility: hidden;"> W&uuml;rfeln </button>
-              </div>
+        <div id="gamestate">
+          <ul id="spielstand"> </ul>
+          <b><ul id="aufgabe"> </ul></b>
+        </div>
+        <div id="button">
+          <button type="button1" id="setReady" onclick="ready();" style="visibility: hidden;"> Bereit </button>
+          <button type="button2" id="roll" onclick="roll();" style="visibility: hidden;"> W&uuml;rfeln </button>
+        </div>
+      </div>
     </div>
-          <table class="tabelle">
+
+    <table class="tabelle">
              <tr>
               <td><canvas width=220 height=145 id="canvas13" style="background-image: url('gfx/feld.png')"></canvas></td>
               <td><canvas width=220 height=145 id="canvas12" style="background-image: url('gfx/feld.png')"></canvas></td>
@@ -70,32 +74,23 @@
               <td><canvas width=220 height=145 id="canvas5" style="background-image: url('gfx/feld.png')"></canvas></td>
             </tr>
           </table>
-<div id="bottom">
-  <div id="online" style="height:300px;width:50%;border:1px;">
 
-            <p id="OLcount"> Aktuell Online: </p>
-            <ul id="currOnline"></ul>
-  </div>
+  <div id="bottom">
+    <div id="online" style="height:300px;width:50%;border:1px;">
+      <p id="OLcount"> Aktuell Online: </p>
+      <ul id="currOnline"></ul>
+    </div>
     <div id="chat" style="height:300px;width:50%;border:1px solid #orange;font:15px/26px arial;">
-            <p> Chat </p>
-     <div
-            style ="height:70%;width:100%;border:1px solid #orange;font:15px/26px arial;overflow:auto;">
-            <ul id="nachrichten"></ul>
-
+      <p> Chat </p>
+     <div id="messages" style ="height:70%;width:100%;border:1px solid #orange;font:15px/26px arial;overflow:auto;">
+       <ul id="nachrichten"></ul>
      </div>
      <form action="">
        <input id="cn" autocomplete="off" />
        <button>Send</button>
      </form>
     </div>
-</div>
-
-              </div>
-            </div>
-          </div>
-          </div>
-      </div>
-    </section>
+  </div>
 
 
     <script src="/socket.io/socket.io.js"></script>
