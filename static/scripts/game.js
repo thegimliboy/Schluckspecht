@@ -1,5 +1,7 @@
 var room = {};
 
+var yourturn = new Audio('sounds/yourturn.mp3');
+
 for (var i=1;i<26;i++){
   eval("feld = document.getElementById('canvas"+i+"')");
   var ctx = feld.getContext("2d");
@@ -95,12 +97,13 @@ $(function(){
 
   socket.on('gamestate', function(rresult, currTurn){
     $('#spielstand').empty();
+    $('#aufgabe').empty();
     //console.log(currTurn);
-    if (currTurn == 'Jetzt ist '+ username +' an der Reihe') {currTurn = 'Du bist dran'; document.getElementById('roll').style.visibility = 'visible';}
+    if (currTurn == 'Jetzt ist '+ username +' an der Reihe') {currTurn = 'Du bist dran'; document.getElementById('roll').style.visibility = 'visible'; yourturn.play();}
     //console.log(currTurn);
     $('#spielstand').append($('<li>').text(rresult));
     //$('#spielstand').append($('<li>').text(currTurn));
-    if (room.currQuestion == 'Not yet assigned') {} else {$('#aufgabe').append($('<li>').text('Aktuelle Aufgabe: ')); $('#aufgabe').append($('<li>').text(room.currQuestion))};
+    if (room.currQuestion == 'Not yet assigned') {} else {$('#aufgabe').append($('<li>').text(room.currCategory+': ')); $('#aufgabe').append($('<li>').text(room.currQuestion))};
     $('#spielstand').append($('<li>').text(currTurn));
   });
 

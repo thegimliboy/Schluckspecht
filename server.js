@@ -72,6 +72,7 @@ function Room (rname) {
   },this;
   this.hadTurn = 0;
   this.currQuestion = 'Not yet assigned';
+  this.currCategory = 'Not yet assigned';
 };
 
 function Player (socketid, nickname) {
@@ -352,6 +353,7 @@ console.log('-------------------------------------------------------------------
                  eval("currQID = getExcercise(rooms.room"+room+".fields.canvas"+eval('rooms.room'+room+'.player.id'+id+'.gamestate')+".category)");
                  //eval(console.log("rooms.room"+room+".currQuestion = getExcercise(rooms.room"+room+".fields.canvas"+eval('rooms.room'+room+'.player.id'+id+'.gamestate')+".category)"));
                  eval("rooms.room"+room+".currQuestion = getExcercise(rooms.room"+room+".fields.canvas"+eval('rooms.room'+room+'.player.id'+id+'.gamestate')+".category, currQID)");
+                 eval("rooms.room"+room+".currCategory = getExcercise(rooms.room"+room+".fields.canvas"+eval('rooms.room'+room+'.player.id'+id+'.gamestate')+".category, 0)");
                  eval("console.log('Current GS= '+rooms.room"+room+".player.id"+id+".gamestate+'; currQID= '+currQID+'; currQuestion= '+rooms.room"+room+".currQuestion)")
                  nomoreTurn(room);nextPlayer(room);updateRoom(room)
                  eval("io.to(room).emit('gamestate', rooms.room"+room+".player.id"+id+".pname+' hat gerade eine '+wuerfel+' gewürfelt', 'Jetzt ist '+ rooms.room"+room+".players[localhadTurn] +' an der Reihe')");
