@@ -117,6 +117,7 @@ function startGame(room) {
     if (eval("rooms.room"+room+".running") === 0) {
       //eval("rooms.room"+room+".running = 1");
       //eval("io.to(room).emit('update_room', rooms.room"+room+")");
+      eval("rooms.room"+room+".fields = {}");
       io.to(room).emit('gamestart');
       eval("console.log('Started game in room "+room+"')");
       eval("rooms.room"+room+".running = 1");
@@ -315,19 +316,19 @@ console.log('-------------------------------------------------------------------
             eval("if (rooms.room"+room+".player.id"+id+".hasTurn == 1 && rooms.room"+room+".player.id"+id+".gamestate !== 25) {execRoll();}");
 
             function execRoll() {
-              console.log("------------------------EXECROLL----------------------------")
+              //console.log("------------------------EXECROLL----------------------------")
               eval("var gs=rooms.room"+room+".player.id"+id+".gamestate");
-              eval("console.log('GS: '+gs)")
-              console.log('Gewürfelt: '+wuerfel);
+              //eval("console.log('GS: '+gs)")
+              //console.log('Gewürfelt: '+wuerfel);
               //eval("console.log('GS+W: '+ (gs+wuerfel)); ")
               var result = gs+wuerfel;
-              console.log("result: "+result)
+              //console.log("result: "+result)
               if (result > 25){
                 var newgs = 25 + (25-result);
-                console.log("newgs = " +newgs)
+                //console.log("newgs = " +newgs)
               }
               eval("rooms.room"+room+".hadTurn = rooms.room"+room+".hadTurn + 1;");
-              eval("console.log(rooms.room"+room+".players[rooms.room"+room+".hadTurn-1])");
+              //eval("console.log(rooms.room"+room+".players[rooms.room"+room+".hadTurn-1])");
               //eval("io.to(room).emit('nachricht', rooms.room"+room+".player.id"+id+".pname+' hat eine '+wuerfel+' gewürfelt')");
 
               /*
@@ -342,7 +343,7 @@ console.log('-------------------------------------------------------------------
               //eval("if (nextGS > 25) {rooms.room"+room+".player.id"+id+".gamestate=25+(25-(rooms.room"+room+".player.id"+id+".gamestate+wuerfel))};console.log('gs>25');finishMove();");
               eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel > 25) {console.log('futgs>25'); rooms.room"+room+".player.id"+id+".gamestate= 25 + (25 -(rooms.room"+room+".player.id"+id+".gamestate+wuerfel)); finishMove();}");
               eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel < 25) {console.log('futgs<25'); rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel;finishMove();}");
-              eval("if (result === 25) {rooms.room"+room+".player.id"+id+".gamestate = 25; console.log('gs==25');io.to(room).emit('gamestate', rooms.room"+room+".player.id"+id+".pname+' hat gerade eine '+wuerfel+' gewürfelt', rooms.room"+room+".players[rooms.room"+room+".hadTurn-1] +' hat gewonnen');rooms.room"+room+".currQuestion='Not yet assigned'; updateRoom(room); console.log(util.inspect(rooms.room"+room+".player.id"+id+"));}");
+              eval("if (result === 25) {rooms.room"+room+".player.id"+id+".gamestate = 25; console.log('gs==25');io.to(room).emit('gamestate', rooms.room"+room+".player.id"+id+".pname+' hat gerade eine '+wuerfel+' gewürfelt', rooms.room"+room+".players[rooms.room"+room+".hadTurn-1] +' hat gewonnen');rooms.room"+room+".currQuestion='Not yet assigned'; rooms.room"+room+".running = 0; /*resetRoom(room);*/ updateRoom(room);}");
 
              //if = 25; startGame, meldung spieler hat gewonnen
                            //eval("rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel");
@@ -354,7 +355,7 @@ console.log('-------------------------------------------------------------------
                  //eval(console.log("rooms.room"+room+".currQuestion = getExcercise(rooms.room"+room+".fields.canvas"+eval('rooms.room'+room+'.player.id'+id+'.gamestate')+".category)"));
                  eval("rooms.room"+room+".currQuestion = getExcercise(rooms.room"+room+".fields.canvas"+eval('rooms.room'+room+'.player.id'+id+'.gamestate')+".category, currQID)");
                  eval("rooms.room"+room+".currCategory = getExcercise(rooms.room"+room+".fields.canvas"+eval('rooms.room'+room+'.player.id'+id+'.gamestate')+".category, 0)");
-                 eval("console.log('Current GS= '+rooms.room"+room+".player.id"+id+".gamestate+'; currQID= '+currQID+'; currQuestion= '+rooms.room"+room+".currQuestion)")
+                 //eval("console.log('Current GS= '+rooms.room"+room+".player.id"+id+".gamestate+'; currQID= '+currQID+'; currQuestion= '+rooms.room"+room+".currQuestion)")
                  nomoreTurn(room);nextPlayer(room);updateRoom(room)
                  eval("io.to(room).emit('gamestate', rooms.room"+room+".player.id"+id+".pname+' hat gerade eine '+wuerfel+' gewürfelt', 'Jetzt ist '+ rooms.room"+room+".players[localhadTurn] +' an der Reihe')");
                            }
@@ -379,4 +380,13 @@ function nomoreTurn(room){
   //console.log(IDnextP)
   eval("rooms.room"+room+".player."+IDnextP+".hasTurn = 0");
   //eval("console.log(util.inspect(rooms.room"+room+".player."+IDnextP+"))");
+}
+
+function resetRoom (room){
+  var ploc = '';
+  console.log("RESET "+room)
+  eval("rooms.room"+room+".running = 0;");
+  eval("tr = rooms.room"+room);
+  for (currP in tr.player) {eval("rooms.room"+room+".player."+currP+".ready = 0")};
+  //eval("for (var currP in rooms.room"+room+".player) {console.log('p: '+currP); rooms.room"+room+".player."+currP+".ready = 0;}");
 }

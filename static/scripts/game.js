@@ -235,6 +235,7 @@ function doCanvasU(){
             j = j+1
             eval("addToCanvas(i, p"+j+")");
             console.log("Added to "+i+"; p"+j)
+            //if (i == 25) {$('#aufgabe').empty(); document.getElementById('setReady').style.visibility = 'visible';}
           }
         }
       }

@@ -5,8 +5,12 @@ body {
   text-align: center;
 }
 
+ul {
+  list-style: none;
+}
+
 #block {
-  height: 200px;
+  height: 210px;
   background-image: linear-gradient(to right, #7350ff , #35beff);
   border-radius: 20px 20px 20px 20px;
   box-shadow: 0 0 7pt 1pt black;
@@ -50,10 +54,6 @@ body {
   display: block;
 }
 
-#main {
-  width:100%;
-}
-
 .tabelle {
   display: inline;
 }
@@ -64,7 +64,7 @@ body {
   height: 250px;
   background:#6f6fff;
   color: white;
-  margin-top: 12px;
+  margin-top: 20px;
   border-radius:12px;
   text-align: center;
 }
@@ -76,7 +76,7 @@ body {
   float: left;
   font-size: 1.5em;
   color: black;
-  margin-top: 12px;
+  margin-top: 20px;
   border-radius:12px;
 }
 
@@ -84,8 +84,9 @@ body {
   text-align: left;
 }
 
-ul {
-  list-style: none;
+#currOnline  {
+  list-style: decimal;
+  text-align: left;
 }
 
 table {
