@@ -84,6 +84,17 @@ body {
   text-align: left;
 }
 
+#currOnline {
+  list-style: decimal;
+  text-align: left;
+}
+
+#footer {
+  color: white;
+  height: 20%;
+  width: 100%;
+}
+
 ul {
   list-style: none;
 }
