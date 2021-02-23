@@ -9,6 +9,10 @@ ul {
   list-style: none;
 }
 
+button {
+margin: 10px;
+}
+
 #block {
   height: 210px;
   background-image: linear-gradient(to right, #7350ff , #35beff);
@@ -54,8 +58,47 @@ ul {
   display: block;
 }
 
+.formborder {
+  margin: 10px
+  border-bottom: 5px solid black;
+}
+
 .tabelle {
   display: inline;
+}
+
+.centerbox {
+background-image: linear-gradient(to right, #9087ff , #66a7ff);
+position: absolute;
+left: 50%;
+top: 40%;
+transform: translate(-50%, -50%);
+padding: 5px;
+border-radius: 20px 20px 20px 20px;
+box-shadow: 0 0 7pt 1pt black;
+height: 30%;
+width: 40%;
+}
+
+.centerboxcontent{
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+#ib1{
+  position: absolute;
+  left: 35%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+#ib2{
+  position: absolute;
+  left: 65%;
+  top: 40%;
+  transform: translate(-50%, -50%);
 }
 
 #online {
