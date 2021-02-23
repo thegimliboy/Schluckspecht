@@ -78,6 +78,7 @@ $(function(){
 
   socket.on('update_room', newroom => {
     room = newroom;
+    if (room.running == 2) {$('#aufgabe').empty(); document.getElementById('setReady').style.visibility = 'visible';}
     console.log('Recieved room obj update')
     doOnlineL();
     if (typeof (room.fields.canvas1) !== 'undefined') {doCanvasU()};
