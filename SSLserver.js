@@ -12,21 +12,39 @@
 //Nach würfeln "gemacht"-Knopf, damit der nächste Würfeln kann
 //Dynamische Feldgröße. Host kann Feldmaße selbst bestimmen durch parameter, die dann mit for-Schleifen die Canvastabellen erstellen
 //Frountend Englischer Text -> Deutscher Text
-//Aufgabenkategorie vor Aufgabe schreiben
-//Pfeilw unter Spieler
-
+//
+var fs = require('fs');
 var express = require('express');
 var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+var app80 = express();
+var server80 = require('http').createServer(app80);
+
 
 var getExcercise = require('./aufgaben');
 
-server.listen(3001, function() {
-  console.log('Started 3001');
-});
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/sv.gimliboy.de/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/sv.gimliboy.de/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/sv.gimliboy.de/chain.pem', 'utf8');
+const certs = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
+};
 
+var server = require('https').createServer(certs, app);
+var io = require('socket.io')(server);
+
+server.listen(443, function() {
+  console.log('Port on 443 started');
+});
 app.use(express.static(__dirname + '/static'));
+
+server80.listen(80, function() {
+  console.log('Port on 80 started');
+});
+app80.use((req, res) => {
+	res.end('<script> window.location.href = "https://sv.gimliboy.de/index.html" </script>');
+});
 
 //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/math.random
 function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}

@@ -1,6 +1,10 @@
 var room = {};
 
 var yourturn = new Audio('sounds/yourturn.mp3');
+var playsound = 1;
+function toggleSound () {
+  if (playsound == 1) {playsound = 0; window.alert("Der Ton ist jetzt aus.")} else {playsound = 1; window.alert("Der Ton ist jetzt wieder angeschaltet.")}
+}
 
 for (var i=1;i<26;i++){
   eval("feld = document.getElementById('canvas"+i+"')");
@@ -100,7 +104,7 @@ $(function(){
     $('#spielstand').empty();
     $('#aufgabe').empty();
     //console.log(currTurn);
-    if (currTurn == 'Jetzt ist '+ username +' an der Reihe') {currTurn = 'Du bist dran'; document.getElementById('roll').style.visibility = 'visible'; yourturn.play();}
+    if (currTurn == 'Jetzt ist '+ username +' an der Reihe') {currTurn = 'Du bist dran'; document.getElementById('roll').style.visibility = 'visible'; if(playsound == 1) {yourturn.play();}}
     //console.log(currTurn);
     $('#spielstand').append($('<li>').text(rresult));
     //$('#spielstand').append($('<li>').text(currTurn));

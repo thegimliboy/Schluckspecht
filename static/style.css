@@ -1,5 +1,5 @@
 body {
-  font-family: arial;
+  font-family: verdana;
   height: 100%;
   background-image: linear-gradient(to right, #9479ff , #7ad4ff);
   text-align: center;
@@ -58,9 +58,12 @@ margin: 10px;
   display: block;
 }
 
-.formborder {
-  margin: 10px
-  border-bottom: 5px solid black;
+.inputborder {
+  padding: 4px;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 4pt 1pt black;
+  background-image: linear-gradient(to right, #66a7ff, #9087ff);
 }
 
 .tabelle {
@@ -143,4 +146,9 @@ td {
 
 canvas {
   display:block;
+}
+
+@viewport {
+  width: device-width ;
+  zoom: 1.0 ;
 }
