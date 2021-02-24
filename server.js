@@ -1,19 +1,12 @@
 //Inspiration: Picolo und Saufen.io
-//Todo: Gameroom Admin, welcher this.players[1] ist.
+//Schluckspecht von Larissa Eger, Kubilay Kaya und Jan Hillen
 //Todo: Kick User
 //Todo: Keine Doppelten Usernames IN EINEM RAUM
 //Todo: Gamcode <10000  &  >100000
-//FELDER OBJECT, darin einzelne Feld objecte: Canvasid, Feldnummer, Kategorie, Frage wird jedes mal auf Server zufällig ausgewählt
 //Regel, Liste mit Regel, Regeln begrenz auf Runden (neue function "nextround()"), window.promt wenn regel abgelaufen
-//Was wenn ein Spieler erst später reinjoined? Was wenn ein Spieler während des Spieles verlässt?
-//Schluckspecht Logo anklickbar machen
-//Schluckspecht Logo in join.html
 //Wenn alle den Raum verlassen haben, dann lösch ihn
 //Nach würfeln "gemacht"-Knopf, damit der nächste Würfeln kann
 //Dynamische Feldgröße. Host kann Feldmaße selbst bestimmen durch parameter, die dann mit for-Schleifen die Canvastabellen erstellen
-//Frountend Englischer Text -> Deutscher Text
-//Aufgabenkategorie vor Aufgabe schreiben
-//Pfeilw unter Spieler
 
 var express = require('express');
 var app = express();
@@ -23,7 +16,7 @@ var io = require('socket.io')(server);
 var getExcercise = require('./aufgaben');
 
 server.listen(3001, function() {
-  console.log('Started 3001');
+  console.log('Started on Port 3001');
 });
 
 app.use(express.static(__dirname + '/static'));
@@ -340,8 +333,8 @@ console.log('-------------------------------------------------------------------
               */
 
               //eval("if (nextGS > 25) {rooms.room"+room+".player.id"+id+".gamestate=25+(25-(rooms.room"+room+".player.id"+id+".gamestate+wuerfel))};console.log('gs>25');finishMove();");
-              eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel > 25) {console.log('futgs>25'); rooms.room"+room+".player.id"+id+".gamestate= 25 + (25 -(rooms.room"+room+".player.id"+id+".gamestate+wuerfel)); finishMove();}");
-              eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel < 25) {console.log('futgs<25'); rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel;finishMove();}");
+              eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel > 25) {console.log('gs>25'); rooms.room"+room+".player.id"+id+".gamestate= 25 + (25 -(rooms.room"+room+".player.id"+id+".gamestate+wuerfel)); finishMove();}");
+              eval("if (rooms.room"+room+".player.id"+id+".gamestate + wuerfel < 25) {console.log('gs<25'); rooms.room"+room+".player.id"+id+".gamestate = rooms.room"+room+".player.id"+id+".gamestate + wuerfel;finishMove();}");
               eval("if (result === 25) {rooms.room"+room+".player.id"+id+".gamestate = 25; console.log('gs==25');io.to(room).emit('gamestate', rooms.room"+room+".player.id"+id+".pname+' hat gerade eine '+wuerfel+' gewürfelt', rooms.room"+room+".players[rooms.room"+room+".hadTurn-1] +' hat gewonnen');rooms.room"+room+".currQuestion='Not yet assigned'; rooms.room"+room+".running = 0; resetRoom(room); updateRoom(room);}");
 
              //if = 25; startGame, meldung spieler hat gewonnen
